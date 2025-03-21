@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+  body {
+    /* Dark background */
+    color: white; /* Light text for dark mode */
+  }
+}
+a {
+  padding: 0;
+  margin: 0;
+  color: teal;
+}
+
+/* Default body styles */
+body {
+  @apply font-sans bg-gray-100 pt-16; /* Tailwind utility classes */
+  @apply bg-gray-900; /* Light background */
+}
+/* Optional: You can add these styles in your global CSS or in your component styles */
+.header-slide-in {
+  transition: transform 0.3s ease-in-out;
+}
+
+.header-hidden {
+  transform: translateY(-100%);
+}
+
+.header-visible {
+  transform: translateY(0);
+}
+
+/* Tailwind utilities for custom fonts, spacing, etc. */
