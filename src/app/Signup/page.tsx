@@ -24,7 +24,7 @@ const Page: React.FC = () => {
         data.append("comfirmpassword",form.comfirmpassword)
         data.append("username",form.username)
         
-        fetch("http://localhost:3001/signup",
+        fetch("https://agent-with-me-backend.onrender.com/signup",
             {
                 method:"POST",
                 body:JSON.stringify(form),

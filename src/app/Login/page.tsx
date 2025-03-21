@@ -19,7 +19,7 @@ const Page:React.FC = () => {
             data.append("password",form.password)
            
             
-            fetch("http://localhost:3001/login",
+            fetch("https://agent-with-me-backend.onrender.com/login",
                 { 
                     method:"POST",
                     body:JSON.stringify(form),
@@ -45,7 +45,7 @@ const Page:React.FC = () => {
           </div>
           <div>
 
-            <button>
+            <button>http://localhost:3001
                 Use Google Account <BsGoogle/>
             </button>
           </div>

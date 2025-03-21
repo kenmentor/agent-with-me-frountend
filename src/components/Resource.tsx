@@ -36,7 +36,7 @@ const Resource = ({ header, thumbnail, price, id ,gallery,landmark}: ResourcePro
   // console.log(thumbnail)
 
   return (
-    <a href={`http://localhost:3000/${id}/resource-details`} >
+    <a href={`https://agent-with-me-backend.onrender.com/${id}/resource-details`} >
       <div className="resourcebox flex flex-col bg-gray-800 rounded-lg overflow-hidden border border-gray-700 shadow-md hover:shadow-lg hover:scale-[1.02] transition-transform duration-300 cursor-pointer">
         {/* Thumbnail Section */}
         <div className="thumbnailCont h-64 w-full overflow-hidden">

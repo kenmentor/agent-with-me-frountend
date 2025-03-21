@@ -41,7 +41,7 @@ const Page: React.FC = () => {
       try {
         setLoading(true); // Start loading when fetching
         const res = await fetch(
-          `http://localhost:3001/resources?keyword=${encodeURIComponent(
+          `https://agent-with-me-backend.onrender.com/resources?keyword=${encodeURIComponent(
             keyword.searchWord
           )}&category=${encodeURIComponent(keyword.category.join())}`,
           {
