@@ -32,7 +32,25 @@ const UploadWizard = () => {
   const goToNextStep = () => setStep((prev) => prev + 1);
   const goToPreviousStep = () => setStep((prev) => prev - 1);
   const  handleSubmit = async () => {
-   
+    const data  = new FormData()
+    if (formData.thumbnail){
+      data.append("thumbnail",formData.thumbnail)
+    }
+    
+    data.append("title",formData.title)
+    data.append("description",formData.description)
+    data.append("category",formData.category)
+    data.append("price",formData.price)
+    data.append("location",formData.location)
+    formData.files.forEach(element  => {
+      data.append("files",formData.title)
+    });
+    
+
+    fetch("localhost:3001/upload",{
+      method:"POST",
+      body:data
+    })
   };
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
