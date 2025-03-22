@@ -19,6 +19,7 @@ interface ResourceType {
   landmark: string;
   gallery: { src: string; alt: string }[];
   price: number;
+  _id:string;
 }
 
 const Page: React.FC = () => {
@@ -35,7 +36,7 @@ const Page: React.FC = () => {
         setLoading(true);
         setError(false);
         const res = await fetch(
-          `https://agent-with-me-backend.onrender.com/resources?keyword=${encodeURIComponent(
+          `http://localhost:3001/resources?keyword=${encodeURIComponent(
             keyword.searchWord
           )}&category=${encodeURIComponent(keyword.category.join())}`
         );
@@ -91,9 +92,9 @@ const Page: React.FC = () => {
             {data.length > 0 ? (
               data.map((resource) => (
                 <Resource
-                  key={resource.id}
+                  key={resource._id}
                   thumbnail={resource.thumbnail}
-                  id={resource.id}
+                  id={resource._id}
                   header={resource.header}
                   rating={resource.rating}
                   gallery={resource.gallery}

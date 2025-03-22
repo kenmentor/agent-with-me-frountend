@@ -42,12 +42,12 @@ const UploadWizard = () => {
     data.append("category",formData.category)
     data.append("price",formData.price)
     data.append("location",formData.location)
-    formData.files.forEach(element  => {
+    formData.files.forEach(()  => {
       data.append("files",formData.title)
     });
     
 
-    fetch("localhost:3001/upload",{
+    fetch("http://localhost:3001/upload",{
       method:"POST",
       body:data
     })
