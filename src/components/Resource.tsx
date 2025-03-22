@@ -85,7 +85,7 @@ const Resource = ({
 
         {/* View Details Button */}
         <Link
-          href={`${id}resource-details`}
+          href={`/${id}resource-details`}
           className="block text-center text-white bg-indigo-600 hover:bg-indigo-700 transition-all duration-300 py-2 rounded-lg font-medium"
         >
           View Details
