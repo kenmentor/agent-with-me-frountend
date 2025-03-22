@@ -1,6 +1,6 @@
 import React from "react";
 
-const Erro = () => {
+const Error = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-900 text-red-500">
       <p>Failed to load resource. Please try again later.</p>
@@ -8,4 +8,4 @@ const Erro = () => {
   );
 };
 
-export default Erro;
+export default Error;

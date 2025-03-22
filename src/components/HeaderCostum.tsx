@@ -1,60 +1,55 @@
 "use client";
-type header = {
-  text:string
-}
 
 import React, { useState, useEffect } from "react";
-import { GoArrowBoth } from "react-icons/go";
+import { GoArrowLeft } from "react-icons/go";
+import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 
-const HeaderCostum = ({ text }:header) => {
-  // State to track whether the header is visible or not
+type HeaderProps = {
+  text: string;
+  showBackButton?: boolean; // Optional back button toggle
+};
+
+const HeaderCustom = ({ text, showBackButton = true }: HeaderProps) => {
   const [isVisible, setIsVisible] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     let lastScrollY = window.scrollY;
     const handleScroll = () => {
-      if (window.scrollY > lastScrollY) {
-        setIsVisible(false); // Hide the header when scrolling down
-      } else {
-        setIsVisible(true); // Show the header when scrolling up
-      }
-      lastScrollY = window.scrollY <= 0 ? 0 : window.scrollY; // Prevent negative scroll position
+      setIsVisible(window.scrollY < lastScrollY || window.scrollY === 0);
+      lastScrollY = window.scrollY;
     };
 
-    // Add scroll event listener
     window.addEventListener("scroll", handleScroll);
-
-    // Clean up event listener on component unmount
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-  
+
   return (
-    <header
-      className={`flex items-center justify-between px-1 py-4 bg-gray-900 fixed top-0 left-0 right-0 text-white z-50 shadow-md transition-all duration-300 ${
-        isVisible ? "translate-y-0" : "-translate-y-20"
-      }`}
+    <motion.header
+      className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 py-3 bg-gray-900 text-white shadow-md"
+      initial={{ y: -80 }}
+      animate={{ y: isVisible ? 0 : -80 }}
+      transition={{ duration: 0.3 }}
     >
-      {/* Back Button */}
-      <a href="http://localhost:3000/homepage">
-      <button
-        className="flex items-center gap-2  border text-white rounded-full hover:bg-gray-700 focus:ring-2 focus:ring-blue-500 transition-all duration-200"
-        aria-label="Go Back"
-        
-      >
-        
-        <GoArrowBoth size={25} />
-      </button>
-      </a>
+      {/* Back Button (Only Show When Needed) */}
+      {showBackButton && (
+        <button
+          onClick={() => router.back()}
+          className="flex items-center gap-2 border border-gray-500 text-white px-3 py-2 rounded-full hover:bg-gray-700 transition-all"
+          aria-label="Go Back"
+        >
+          <GoArrowLeft size={20} /> Back
+        </button>
+      )}
 
-      {/* Heading Section */}
-      <h1 className="text-2xl font-semibold text-center flex-1 text-nowrap ">{text}</h1>
+      {/* Title */}
+      <h1 className="text-lg font-semibold text-center flex-1 truncate">{text}</h1>
 
-      {/* Additional Content (Right Side) */}
-      <div className="flex items-center gap-4"></div>
-    </header>
+      {/* Right Side Content (Empty for Now) */}
+      <div className="w-8"></div>
+    </motion.header>
   );
 };
 
-export default HeaderCostum;
+export default HeaderCustom;

@@ -2,25 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Dark Mode */
-@media (prefers-color-scheme: dark) {
-  body {
-    /* Dark background */
-    color: white; /* Light text for dark mode */
-  }
+/* Light Mode (Default) */
+body {
+  @apply font-sans bg-white text-gray-900 pt-16; /* Light background & dark text */
 }
+
 a {
   padding: 0;
   margin: 0;
-  color: teal;
+  color: #007acc; /* A professional blue shade */
+  transition: color 0.3s ease-in-out;
 }
 
-/* Default body styles */
-body {
-  @apply font-sans bg-gray-100 pt-16; /* Tailwind utility classes */
-  @apply bg-gray-900; /* Light background */
+a:hover {
+  color: #005a9e; /* Darker shade on hover */
 }
-/* Optional: You can add these styles in your global CSS or in your component styles */
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+  body {
+    @apply bg-gray-900 text-white;
+  }
+}
+
+/* Header Animation */
 .header-slide-in {
   transition: transform 0.3s ease-in-out;
 }
@@ -33,4 +38,27 @@ body {
   transform: translateY(0);
 }
 
-/* Tailwind utilities for custom fonts, spacing, etc. */
+/* Form Inputs Styling */
+input, textarea {
+  @apply p-3 border border-gray-300 rounded-md w-full;
+  transition: border-color 0.3s ease-in-out;
+}
+
+input:focus, textarea:focus {
+  @apply border-blue-500 outline-none;
+}
+
+/* Buttons */
+button {
+  @apply bg-blue-600 text-white p-3 rounded-md;
+  transition: background-color 0.3s ease-in-out;
+}
+
+button:hover {
+  @apply bg-blue-700;
+}
+
+/* Utility Classes */
+.container {
+  @apply mx-auto px-4 max-w-7xl;
+}

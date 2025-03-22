@@ -1,11 +1,11 @@
 
 import Image from 'next/image'
 import React ,{useEffect, useState} from 'react'
-type Gallary = {
-  gallary:[{
+type Gallery = {
+  gallery:{
     src:string,
     alt:string
-  }]
+  }[]
 }
 type image = {
   src:string ,
@@ -14,7 +14,7 @@ type image = {
   id:number
 }
 
-const Gallary = ({gallary}:Gallary) => {
+const Gallery = ({gallery}:Gallery) => {
     const [gallaryElement,setgallary] = useState([{
       src:"",
       alt:"",
@@ -24,7 +24,7 @@ const Gallary = ({gallary}:Gallary) => {
     
       
     useEffect(()=>{
-    const modifiedGalllary = gallary.map((element,index)=>{
+    const modifiedGalllary = gallery.map((element,index)=>{
       if (index == 0){
 
       
@@ -55,7 +55,7 @@ const Gallary = ({gallary}:Gallary) => {
    const  images = gallaryElement.map((Element)=> (
    <Image 
 
-   className ={`h-10 w-10 bg-cover object-cover rounded ${!(Element.isActive)&& "border"}`}
+   className ={`h-10 w-10 bg-cover object-cover rounded `}
    onClick={
     ()=>active(Element)
   } 
@@ -71,4 +71,4 @@ const Gallary = ({gallary}:Gallary) => {
   )
 }
 
-export default Gallary
+export default Gallery

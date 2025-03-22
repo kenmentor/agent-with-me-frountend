@@ -1,59 +1,46 @@
 "use client";
+
 import Resource from "@/components/Resource";
 import SearchBar from "@/components/SearchBar";
 import React, { useEffect, useState } from "react";
 import Searchbox from "@/components/searchbox";
-import Loainding from "@/components/Loainding";
-import Erro from "@/components/Erro";
-
-// Define resource type more precisely
-type ResourceType = {
+import Loading from "@/components/Loainding";
+import Error from "@/components/Erro";
+import { motion } from "framer-motion";
+import Footer from "@/components/footer";
+// Define resource type
+interface ResourceType {
   header: string;
   views: number;
   description: string;
-  rating: number; // Changed from 'Number' to 'number'
+  rating: number;
   id: string;
   thumbnail: string;
-  landmark:string,
-  gallery:[{
-    src:"",
-    alt:""
-  }]
-  price:number
-};
+  landmark: string;
+  gallery: { src: string; alt: string }[];
+  price: number;
+}
 
 const Page: React.FC = () => {
-  const [keyword, setKeyword] = useState<{
-    searchWord: string;
-    category: string[];
-  }>({
-    searchWord: "",
-    category: [],
-  });
-
-  const [data, setData] = useState<ResourceType[]>([]); // Specify the type of data
+  const [keyword, setKeyword] = useState<{ searchWord: string; category: string[] }>(
+    { searchWord: "", category: [] }
+  );
+  const [data, setData] = useState<ResourceType[]>([]);
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
 
-  // Fetch data from backend when keyword or category changes
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setLoading(true); // Start loading when fetching
+        setLoading(true);
+        setError(false);
         const res = await fetch(
           `https://agent-with-me-backend.onrender.com/resources?keyword=${encodeURIComponent(
             keyword.searchWord
-          )}&category=${encodeURIComponent(keyword.category.join())}`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
+          )}&category=${encodeURIComponent(keyword.category.join())}`
         );
-        const data = await res.json();
-        setData(data);
-        setError(false);
+        const result = await res.json();
+        setData(result);
       } catch (error) {
         console.error("Error fetching data:", error);
         setError(true);
@@ -63,37 +50,23 @@ const Page: React.FC = () => {
     };
     fetchData();
   }, [keyword]);
-console.log(keyword)
-  // Fetch data from the backend API with query params for keyword and category
-
-  // Render resources as components
-  const elementResource = data.map((resource,index) => (
-    <Resource
-      key={index} //should be _id
-      thumbnail={resource.thumbnail}
-      id={resource.id} // should be _id 
-      header={resource.header}
-      rating={resource.rating}
-      gallery={resource.gallery}
-      landmark={resource.landmark}
-      price={resource.price}
-    />
-  ));
 
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-300">
+    <>
+    <div className="min-h-screen bg-gray-50 text-gray-900">
       {/* Header Section */}
-      <header className="px-6 py-8 bg-gray-800 border-b border-gray-700">
-        <h1 className="text-lg font-medium text-gray-100 mb-2">
-          Rent a House Today
-        </h1>
-        <p className="text-sm text-gray-400">
-          find a decent apartment made just for you 
-        </p>
-      </header>
+      <motion.header
+        className="px-6 py-8 bg-blue-600 shadow-md text-white text-center"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <h1 className="text-3xl font-bold">Find Your Perfect Home</h1>
+        <p className="text-gray-200">Browse thousands of listings to find your ideal apartment</p>
+      </motion.header>
 
       {/* Search Section */}
-      <section className="px-6 py-6 bg-gray-100">
+      <section className="px-6 py-6 bg-white shadow-sm">
         <div className="max-w-4xl mx-auto">
           <SearchBar setKeyword={setKeyword} />
           <div className="mt-4">
@@ -103,23 +76,41 @@ console.log(keyword)
       </section>
 
       {/* Main Content */}
-      {loading ? (
-        <Loainding />
-      ) : error ? (
-        <Erro />
-      ) : (
-        <main className="px-6 py-10 bg-gray-100">
-          <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
-            {elementResource.length&&(
-              elementResource
+      <main className="px-6 py-10">
+        {loading ? (
+          <Loading />
+        ) : error ? (
+          <Error />
+        ) : (
+          <motion.div
+            className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            {data.length > 0 ? (
+              data.map((resource) => (
+                <Resource
+                  key={resource.id}
+                  thumbnail={resource.thumbnail}
+                  id={resource.id}
+                  header={resource.header}
+                  rating={resource.rating}
+                  gallery={resource.gallery}
+                  landmark={resource.landmark}
+                  price={resource.price || 0}
+                />
+              ))
+            ) : (
+              <p className="text-gray-500 text-center col-span-full">No results found</p>
             )}
-          </div>
-        </main>
-      )}
-
-      {/* Footer */}
-      {/* <Footer className="mt-auto" /> */}
+          </motion.div>
+        )}
+      </main>
+     
     </div>
+    <Footer/>
+    </>
   );
 };
 
