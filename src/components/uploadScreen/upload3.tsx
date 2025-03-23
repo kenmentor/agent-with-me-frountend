@@ -9,7 +9,12 @@ interface formData {
   category: string;
   price: string;
   location: string;
- 
+  type : string;
+  address: string,
+  state:string,
+  landmark:string,
+  waterSuply:boolean ,
+  electricity:number,
 }
 interface StepThreeProps {
   formData:formData;
@@ -42,6 +47,9 @@ const StepThree: React.FC<StepThreeProps> = ({ formData, setFormData, goToPrevio
               src={URL.createObjectURL(file)}
               alt={`Thumbnail ${index}`}
               className="w-full h-24 object-cover"
+
+              height={"24"}
+              width={"24"}
             />
             {formData.thumbnail === file && (
               <span className="absolute top-2 right-2 bg-blue-600 text-white text-xs px-2 py-1 rounded-full">

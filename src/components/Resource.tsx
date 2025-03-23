@@ -28,10 +28,10 @@ const Resource = ({
   category = "Luxury", // 🔥 Markup placeholder (Replace later)
   isNew = false, // 🔥 Markup placeholder (Replace later)
 }: ResourceProps) => {
+  console.log(thumbnail)
   return (
     <motion.div
       className="relative bg-white rounded-xl overflow-hidden border border-gray-300 shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer"
-      whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
       transition={{ duration: 0.3 }}
     >
@@ -41,8 +41,8 @@ const Resource = ({
           New
         </span>
       )}
-
-      {/* Favorite Button */}
+      <img src="  https://res.cloudinary.com/ddbgv75bn/image/upload/v1738627025/thumbnails/vravqbbs7cizijqq6gqa.png" alt="" />
+      {/* Favor<Image width={50}  src={"https://res.cloudinary.com/ddbgv75bn/image/upload/v1738627025/thumbnails/vravqbbs7cizijqq6gqa.png"} alt="try" ite Button */}
       <button className="absolute top-3 right-3 bg-white p-2 rounded-full shadow hover:bg-gray-200">
         <FaHeart className="text-red-500" />
       </button>
@@ -51,9 +51,10 @@ const Resource = ({
       <div className="relative h-52 w-full overflow-hidden">
         <Image
           src={thumbnail}
-          alt={header}
+          alt={"hhh"}
           layout="fill"
           objectFit="cover"
+          unoptimized={true}
           className="transition-transform duration-300 hover:scale-105"
         />
       </div>
@@ -85,7 +86,7 @@ const Resource = ({
 
         {/* View Details Button */}
         <Link
-          href={`/${id}resource-details`}
+          href={`/${id}/resource-details`}
           className="block text-center text-white bg-indigo-600 hover:bg-indigo-700 transition-all duration-300 py-2 rounded-lg font-medium"
         >
           View Details

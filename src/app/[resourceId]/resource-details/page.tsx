@@ -1,24 +1,49 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaStar, FaWhatsapp, FaTimes, FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
+import { useParams } from "next/navigation";
 import Footer from "@/components/footer";
+	
+
+
 
 const placeholderImages = [
-  { src: "https://source.unsplash.com/600x400/?house", alt: "Modern house" },
-  { src: "https://source.unsplash.com/600x400/?apartment", alt: "Luxury apartment" },
-  { src: "https://source.unsplash.com/600x400/?villa", alt: "Beautiful villa" },
-  { src: "https://source.unsplash.com/600x400/?real-estate", alt: "Real estate property" },
-  { src: "https://source.unsplash.com/600x400/?architecture", alt: "Stunning architecture" },
-  { src: "https://source.unsplash.com/600x400/?interior", alt: "Interior design" },
-];
+  { src: "https://unsplash.com/assets/research/research-mesh-static-33a7db3ef7353c6b377ab60b99fd0e65b0e45f1772388aebb1f74e03a272c03d.png", alt: "Modern house" },
+  { src: "https://media.istockphoto.com/id/2161896294/photo/woman-smiling-and-expressing-gratitude-during-a-conversation.webp?a=1&b=1&s=612x612&w=0&k=20&c=e1EdH8Aus-LOacUwNExQ1aOhwIHiFFk6jYKZ32w2vU8=", alt: "Luxury apartment" },
+  { src: "https://media.istockphoto.com/id/2166573931/photo/reflection-of-people-on-glass-window.webp?a=1&b=1&s=612x612&w=0&k=20&c=UdSzmftZeqCloH6onoK1t11jXsocSfv7QNJzTkwFfVU=", alt: "Beautiful villa" },
+  { src: "https://media.istockphoto.com/id/2151129875/photo/casual-teens-group-portrait.webp?a=1&b=1&s=612x612&w=0&k=20&c=ynpyawIt9o6SDNEv3xmg1Fb6Cc4N1ypJAzxZKPxsB5k=", alt: "Real estate property" },
+  { src: "https://media.istockphoto.com/id/2150750471/photo/happy-girl-baking-at-home-with-her-loving-parents.webp?a=1&b=1&s=612x612&w=0&k=20&c=aeioXhzjXneWy0afGIK3DFBkqGe18up2laSEripAZRk=", alt: "Stunning architecture" },
+  { src: "https://media.istockphoto.com/id/2151129875/photo/casual-teens-group-portrait.webp?a=1&b=1&s=612x612&w=0&k=20&c=ynpyawIt9o6SDNEv3xmg1Fb6Cc4N1ypJAzxZKPxsB5k=", alt: "Interior design" },
+]; 
+
 
 const RentalPage: React.FC = () => {
+  const {resourceId} = useParams()
   const [selectedImage, setSelectedImage] = useState<{ src: string; alt: string }>(placeholderImages[0]);
   const [modalOpen, setModalOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  
+  const [data,setdata] = useState({
+    _id	:"67a1556ba07c49d55f85b11f",
+    title	:"HELLO ",
+    description:	"JUST TESTING IF IT IS WORKING ",
+    views	:0,
+    rating:	4.5,
+    category	:	"English",
+    thumbnail:	"",
+    gallery	:[],
+    price:4933,
+    address: "saga ",
+    state:"lagos",
+    landmark:"tou ctoyyr",
+    type:"selfcon",
+    waterSuply:true ,
+    electricity:50,
+  })
 
   const handleImageClick = (index: number) => {
     setSelectedImage(placeholderImages[index]);
@@ -38,24 +63,37 @@ const RentalPage: React.FC = () => {
   };
 
   const handleWhatsAppContact = () => {
-    const phoneNumber = "2348012345678";
+    const phoneNumber = "2349117264336";
     const message = `Hello, I'm interested in this property. Can you provide more details?`;
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, "_blank");
   };
+  async function getdata (){
+    try{
+      const res = await fetch(`https://agent-with-me-backend.onrender.com/${resourceId}`)
+      const result = await res.json();
+      setdata(result);
+    }
+   catch{ 
+    console.log("error")
+   }
+  }
+useEffect(()=>{
+  getdata()
+},[])
 
   return (
     <>
     <div className="max-w-6xl mx-auto p-6 bg-white shadow-lg rounded-lg">
       {/* Header & Rating */}
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold text-gray-900">Luxury Apartment</h1>
+        <h1 className="text-3xl font-bold text-gray-900">{data.title}</h1>
         <div className="flex items-center gap-1">
           <FaStar className="text-yellow-500" />
-          <span className="text-gray-700 font-semibold">4.8 (120 reviews)</span>
+          <span className="text-gray-700 font-semibold">4.8 ({data.views} reviews)</span>
         </div>
       </div>
-      <p className="text-gray-600 mt-1">📍 Victoria Island, Lagos, Nigeria</p>
+      <p className="text-gray-600 mt-1">📍 {data.landmark}, {data.state}, Nigeria</p>
 
       {/* Main Image */}
       <div className="relative w-full h-80 mt-4 rounded-lg overflow-hidden cursor-pointer"
@@ -66,11 +104,11 @@ const RentalPage: React.FC = () => {
 
       {/* Image Gallery - Slider */}
       <div className="flex mt-4 gap-2 overflow-x-auto hide-scrollbar">
-        {placeholderImages.map((image, index) => (
+        {data.gallery.map((image, index) => (
           <div key={index} className={`relative w-24 h-24 rounded-lg overflow-hidden cursor-pointer 
-                  ${selectedImage.src === image.src ? "border-4 border-blue-500" : ""}`}
+                  ${selectedImage === image ? "border-4 border-blue-500" : ""}`}
                onClick={() => handleImageClick(index)}>
-            <Image src={image.src} alt={image.alt} layout="fill" objectFit="cover"
+            <Image src={image} alt={image} layout="fill" objectFit="cover"
                    className="rounded-lg transition-transform duration-200 hover:scale-105" />
           </div>
         ))}
@@ -79,9 +117,9 @@ const RentalPage: React.FC = () => {
       {/* Pricing & Booking */}
       <div className="mt-6 p-4 bg-gray-100 rounded-lg">
         <p className="text-lg font-semibold">
-          $250 <span className="text-sm text-gray-600">/ per night</span>
+          {data.price} <span className="text-sm text-gray-600">/ per year</span>
         </p>
-        <p className="text-gray-600">4 Guests • 2 Beds • 2 Baths</p>
+        <p className="text-gray-600">{data.type} • 2 Beds • 2 Baths</p>
         <button className="mt-4 w-full bg-orange-500 text-white py-2 rounded-lg font-semibold hover:bg-orange-600 transition">
           Book Now & Pay Later
         </button>

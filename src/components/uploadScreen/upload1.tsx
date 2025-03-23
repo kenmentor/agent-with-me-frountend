@@ -9,6 +9,13 @@ interface formData {
   category: string;
   price: string;
   location: string;
+  type : string;
+  address: string,
+  state:string,
+  landmark:string,
+  waterSuply:boolean ,
+  electricity:number,
+
  
 }
 interface StepOneProps {
@@ -47,6 +54,13 @@ const StepOne: React.FC<StepOneProps> = ({ formData, setFormData, goToNextStep }
           onChange={(e) => setFormData((prev: formData) => ({ ...prev, title: e.target.value }))}
           className="w-full p-3 bg-gray-800 text-white rounded-md focus:outline-none focus:ring focus:ring-blue-500"
         />
+         <input
+          type="number"
+          placeholder="price eg 20000"
+          value={formData.price}
+          onChange={(e) => setFormData((prev: formData) => ({ ...prev, price: e.target.value }))}
+          className="w-full p-3 bg-gray-800 text-white rounded-md focus:outline-none focus:ring focus:ring-blue-500"
+        />
 
         <textarea
           placeholder="Enter description"
@@ -70,7 +84,7 @@ const StepOne: React.FC<StepOneProps> = ({ formData, setFormData, goToNextStep }
       <div className="grid grid-cols-3 gap-4 mt-4">
         {formData.files.map((file, index) => (
           <div key={index} className="relative w-full h-32 border border-gray-700 rounded-lg overflow-hidden">
-            <Image src={URL.createObjectURL(file)} alt={file.name} className="w-full h-full object-cover" />
+            <Image src={URL.createObjectURL(file)} alt={file.name} className="w-full h-full object-cover" fill={true}/>
           </div>
         ))}
       </div>

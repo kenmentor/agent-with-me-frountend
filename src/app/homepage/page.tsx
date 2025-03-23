@@ -40,8 +40,10 @@ const Page: React.FC = () => {
             keyword.searchWord
           )}&category=${encodeURIComponent(keyword.category.join())}`
         );
+        
         const result = await res.json();
         setData(result);
+        console.log(result)
       } catch (error) {
         console.error("Error fetching data:", error);
         setError(true);
@@ -93,13 +95,13 @@ const Page: React.FC = () => {
               data.map((resource) => (
                 <Resource
                   key={resource._id}
-                  thumbnail={resource.thumbnail}
+                  thumbnail={resource.thumbnail||"/de/d"}
                   id={resource._id}
                   header={resource.header}
                   rating={resource.rating}
                   gallery={resource.gallery}
                   landmark={resource.landmark}
-                  price={resource.price || 0}
+                  price={resource.price || 200000}
                 />
               ))
             ) : (

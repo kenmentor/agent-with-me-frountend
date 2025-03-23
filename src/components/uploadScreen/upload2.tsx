@@ -7,6 +7,13 @@ interface formData {
   category: string;
   price: string;
   location: string;
+  type : string;
+  address: string,
+  state:string,
+  landmark:string,
+  waterSuply:boolean ,
+  electricity:number,
+
  
 }
 interface StepTwoProps {
@@ -16,26 +23,26 @@ interface StepTwoProps {
   goToNextStep: () => void;
 }
 
-const categories = ["Apartments", "Houses", "Offices", "Storage Units"];
+const types = ["selfcon", "one bed room", "two bed room", "single room "];
 
 const StepTwo: React.FC<StepTwoProps> = ({ formData, setFormData, goToPreviousStep, goToNextStep }) => {
   return (
     <div className="bg-gray-900 text-gray-300 p-6 rounded-lg shadow-md max-w-4xl mx-auto">
-      <h2 className="text-2xl font-semibold text-gray-100 mb-6">Step 2: Select Category</h2>
+      <h2 className="text-2xl font-semibold text-gray-100 mb-6">Step 2: Select House type</h2>
       
       <div className="space-y-4">
-        <p className="text-gray-400">Choose the category that best fits your rental property.</p>
+        <p className="text-gray-400">Choose the category that best fits your house.</p>
         
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-          {categories.map((category) => (
+          {types.map((type) => (
             <div
-              key={category}
+              key={type}
               className={`p-3 border rounded-lg cursor-pointer text-center transition ${
-      formData.category === category ? "border-blue-500 bg-gray-800" : "border-gray-700"
+      formData.type === type ? "border-blue-500 bg-gray-800" : "border-gray-700"
               }`}
-              onClick={() => setFormData((prev: formData) => ({ ...prev, category }))}
+              onClick={() => setFormData((prev: formData) => ({ ...prev, type }))}
             >
-              {category}
+              {type}
             </div>
           ))}
         </div>
