@@ -41,7 +41,6 @@ const Resource = ({
           New
         </span>
       )}
-      <img src="  https://res.cloudinary.com/ddbgv75bn/image/upload/v1738627025/thumbnails/vravqbbs7cizijqq6gqa.png" alt="" />
       {/* Favor<Image width={50}  src={"https://res.cloudinary.com/ddbgv75bn/image/upload/v1738627025/thumbnails/vravqbbs7cizijqq6gqa.png"} alt="try" ite Button */}
       <button className="absolute top-3 right-3 bg-white p-2 rounded-full shadow hover:bg-gray-200">
         <FaHeart className="text-red-500" />
