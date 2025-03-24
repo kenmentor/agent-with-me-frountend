@@ -61,6 +61,14 @@ const StepOne: React.FC<StepOneProps> = ({ formData, setFormData, goToNextStep }
           onChange={(e) => setFormData((prev: formData) => ({ ...prev, price: e.target.value }))}
           className="w-full p-3 bg-gray-800 text-white rounded-md focus:outline-none focus:ring focus:ring-blue-500"
         />
+         <input
+          type="text"
+          placeholder="address E.g plot 4 harmony estate "
+          value={formData.address}
+          onChange={(e) => setFormData((prev: formData) => ({ ...prev, address: e.target.value }))}
+          className="w-full p-3 bg-gray-800 text-white rounded-md focus:outline-none focus:ring focus:ring-blue-400"
+        />
+        
 
         <textarea
           placeholder="Enter description"
