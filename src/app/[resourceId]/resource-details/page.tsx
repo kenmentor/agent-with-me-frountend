@@ -10,32 +10,40 @@ import Footer from "@/components/footer";
 
 
 
-const placeholderImages = [
-  { src: "https://unsplash.com/assets/research/research-mesh-static-33a7db3ef7353c6b377ab60b99fd0e65b0e45f1772388aebb1f74e03a272c03d.png", alt: "Modern house" },
-  { src: "https://media.istockphoto.com/id/2161896294/photo/woman-smiling-and-expressing-gratitude-during-a-conversation.webp?a=1&b=1&s=612x612&w=0&k=20&c=e1EdH8Aus-LOacUwNExQ1aOhwIHiFFk6jYKZ32w2vU8=", alt: "Luxury apartment" },
-  { src: "https://media.istockphoto.com/id/2166573931/photo/reflection-of-people-on-glass-window.webp?a=1&b=1&s=612x612&w=0&k=20&c=UdSzmftZeqCloH6onoK1t11jXsocSfv7QNJzTkwFfVU=", alt: "Beautiful villa" },
-  { src: "https://media.istockphoto.com/id/2151129875/photo/casual-teens-group-portrait.webp?a=1&b=1&s=612x612&w=0&k=20&c=ynpyawIt9o6SDNEv3xmg1Fb6Cc4N1ypJAzxZKPxsB5k=", alt: "Real estate property" },
-  { src: "https://media.istockphoto.com/id/2150750471/photo/happy-girl-baking-at-home-with-her-loving-parents.webp?a=1&b=1&s=612x612&w=0&k=20&c=aeioXhzjXneWy0afGIK3DFBkqGe18up2laSEripAZRk=", alt: "Stunning architecture" },
-  { src: "https://media.istockphoto.com/id/2151129875/photo/casual-teens-group-portrait.webp?a=1&b=1&s=612x612&w=0&k=20&c=ynpyawIt9o6SDNEv3xmg1Fb6Cc4N1ypJAzxZKPxsB5k=", alt: "Interior design" },
-]; 
-
+interface data {
+  _id	:string;
+    title	:string;
+    description:	string;
+    views	:number;
+    rating:	number;
+    category	:	string;
+    thumbnail:	string;
+    gallery	:[string];
+    price:number;
+    address: string ;
+    state:string;
+    landmark:string;
+    type:string;
+    waterSuply:boolean ;
+    electricity:number;
+}
 
 const RentalPage: React.FC = () => {
   const {resourceId} = useParams()
-  const [selectedImage, setSelectedImage] = useState<{ src: string; alt: string }>(placeholderImages[0]);
+  const [selectedImage, setSelectedImage] = useState<string>("");
   const [modalOpen, setModalOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   
-  const [data,setdata] = useState({
+  const [data,setdata] = useState<data>({
     _id	:"67a1556ba07c49d55f85b11f",
     title	:"HELLO ",
     description:	"JUST TESTING IF IT IS WORKING ",
     views	:0,
     rating:	4.5,
-    category	:	"English",
+    category	:	"Mediate",
     thumbnail:	"",
-    gallery	:[],
+    gallery	:[""],
     price:4933,
     address: "saga ",
     state:"lagos",
@@ -46,19 +54,19 @@ const RentalPage: React.FC = () => {
   })
 
   const handleImageClick = (index: number) => {
-    setSelectedImage(placeholderImages[index]);
+    setSelectedImage(data.gallery[index]);
     setCurrentIndex(index);
   };
 
   const nextImage = () => {
-    const newIndex = (currentIndex + 1) % placeholderImages.length;
-    setSelectedImage(placeholderImages[newIndex]);
+    const newIndex = (currentIndex + 1) % data.gallery.length;
+    setSelectedImage(data.gallery[newIndex]);
     setCurrentIndex(newIndex);
   };
 
   const prevImage = () => {
-    const newIndex = (currentIndex - 1 + placeholderImages.length) % placeholderImages.length;
-    setSelectedImage(placeholderImages[newIndex]);
+    const newIndex = (currentIndex - 1 + data.gallery.length) % data.gallery.length;
+    setSelectedImage(data.gallery[newIndex]);
     setCurrentIndex(newIndex);
   };
 
@@ -72,7 +80,8 @@ const RentalPage: React.FC = () => {
     try{
       const res = await fetch(`https://agent-with-me-backend.onrender.com/${resourceId}`)
       const result = await res.json();
-      setdata(result);
+      await setdata(result)
+      
     }
    catch{ 
     console.log("error")
@@ -81,9 +90,29 @@ const RentalPage: React.FC = () => {
 useEffect(()=>{
   getdata()
 },[])
+function click (){
+  alert("working boys")
+  console.log("working boys")
+  setModalOpen(prev=>!prev)
+}
+let categoryStyle = "text-blue-500"
+
+
+if (data.category=="Premuim"){
+  categoryStyle = "text-blue-500"
+}
+if (data.category=="Mediate"){
+  categoryStyle = "text-orange-500"
+}
+
+if (data.category=="Minimal"){
+  categoryStyle = "text-green-500"
+}
+
 
   return (
     <>
+   
     <div className="max-w-6xl mx-auto p-6 bg-white shadow-lg rounded-lg">
       {/* Header & Rating */}
       <div className="flex justify-between items-center">
@@ -93,12 +122,14 @@ useEffect(()=>{
           <span className="text-gray-700 font-semibold">4.8 ({data.views} reviews)</span>
         </div>
       </div>
+      
       <p className="text-gray-600 mt-1">📍 {data.landmark}, {data.state}, Nigeria</p>
+     
 
       {/* Main Image */}
       <div className="relative w-full h-80 mt-4 rounded-lg overflow-hidden cursor-pointer"
            onClick={() => setModalOpen(true)}>
-        <Image src={selectedImage.src} alt={selectedImage.alt} layout="fill" objectFit="cover"
+        <Image src={selectedImage} alt={data.title} layout="fill" objectFit="cover"
                className="rounded-lg transition duration-300 hover:opacity-80" />
       </div>
 
@@ -116,12 +147,14 @@ useEffect(()=>{
 
       {/* Pricing & Booking */}
       <div className="mt-6 p-4 bg-gray-100 rounded-lg">
-        <p className="text-lg font-semibold">
-          {data.price} <span className="text-sm text-gray-600">/ per year</span>
+        <p className="text-lg font-semibold  text-gray-800">
+        ₦{data.price.toLocaleString()} <span className="text-sm text-gray-300">/ per year</span>
         </p>
-        <p className="text-gray-600">{data.type} • 2 Beds • 2 Baths</p>
+        <p className="text-gray-600">{data.type} • 2 {(data.waterSuply)? "with water":"without water "} •  <div className="inline  bg-gray-200 rounded-xl px-2  py-1  text-center " >
+      <p className={`${categoryStyle} inline`}>{data.category}</p>
+        </div></p>
         <button className="mt-4 w-full bg-orange-500 text-white py-2 rounded-lg font-semibold hover:bg-orange-600 transition">
-          Book Now & Pay Later
+        Rent Now 
         </button>
 
         {/* WhatsApp Contact Button */}
@@ -139,14 +172,13 @@ useEffect(()=>{
                       initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
             <div className="relative max-w-4xl w-full p-4 bg-white rounded-lg shadow-lg">
               {/* Close Button */}
-              <button className="absolute top-4 right-4 bg-gray-800 text-white p-2 rounded-full hover:bg-red-500"
-                      onClick={() => setModalOpen(false)}>
-                <FaTimes />
-              </button>
+              <button  className="absolute top-4 right-4  bg-gray-800 text-white p-2 rounded-full hover:bg-red-500"   onClick={click}>
+              <FaTimes />
+    </button>
 
               {/* Large Image */}
               <div className="relative w-full h-[500px] flex justify-center items-center">
-                <motion.img src={selectedImage.src} alt={selectedImage.alt} className="max-h-[90vh] w-auto rounded-lg"
+                <motion.img src={selectedImage} alt={data.title} className="max-h-[90vh] w-auto rounded-lg"
                             initial={{ scale: 0.8 }} animate={{ scale: 1 }} exit={{ scale: 0.8 }} />
               </div>
 
@@ -159,6 +191,7 @@ useEffect(()=>{
                       onClick={nextImage}>
                 <FaArrowRight size={24} />
               </button>
+              
             </div>
           </motion.div>
         )}

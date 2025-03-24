@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaTiktok } from "react-icons/fa";
 
 const Footer = () => {
   return (
@@ -40,6 +40,9 @@ const Footer = () => {
             </Link>
             <Link href="#" className="p-3 rounded-full bg-gray-200 hover:bg-blue-700 hover:text-white transition-all">
               <FaLinkedinIn />
+            </Link>
+            <Link href="#" className="p-3 rounded-full bg-gray-200 hover:bg-black hover:text-white transition-all">
+              <FaTiktok />
             </Link>
           </div>
         </div>
