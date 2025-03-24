@@ -36,7 +36,7 @@ const UploadWizard = () => {
     images:[],
     type:"",
     address:"",
-    state:"",
+    state:"Calabar",
     landmark:"",
     waterSuply:true,
     electricity:90,
@@ -55,12 +55,13 @@ const UploadWizard = () => {
     data.append("price",formData.price)
     data.append("location",formData.location)
     data.append("type",formData.type)
-    data.append("state",formData.price)
+    data.append("address",formData.address)
+    data.append("state",formData.state)
     data.append("landmark",formData.landmark)
     data.append("waterSuply",JSON.stringify(formData.waterSuply))
     data.append("electricity",JSON.stringify(formData.electricity))
-    formData.files.forEach(()  => {
-      data.append("files",formData.title)
+    formData.files.forEach((file)  => {
+      data.append("files",file)
     });
     
 
@@ -69,15 +70,14 @@ const UploadWizard = () => {
       body:data
     })
   };
+  console.log((100/6)*step)
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
       {/* Progress Tracker */}
-      <div className="flex justify-between mb-6">
-        {["Upload Images", "Details", "Thumbnail", "Preview & Submit"].map(
-          (label, index) => (
-            <div key={index} className={`flex-1 text-center ${step === index + 1 ? "font-bold text-blue-600" : "text-gray-400"}`}>{label}</div>
-          )
-        )}
+      <div className="flex justify-between mb-6 w-full bg-red-300">
+        <div className="flex bg-blue-700 h-3" style={{
+          width:`${((step-1)/5)*100}%`
+        }}> </div>
       </div>
 
       {/* Step Components */}
