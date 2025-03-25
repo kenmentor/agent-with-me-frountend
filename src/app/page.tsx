@@ -10,13 +10,14 @@ const Page = () => {
     <div className="h-screen flex flex-col items-center justify-center bg-gradient-to-r from-blue-900 to-indigo-900 text-white text-center p-6">
       {/* Animated Heading */}
       <motion.h1
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
-        className="text-5xl font-bold mb-4 drop-shadow-lg"
-      >
-        Welcome to Your Dream Rental
-      </motion.h1>
+  initial={{ opacity: 0, y: -50 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 1 }}
+  className="text-6xl font-extrabold mb-4 drop-shadow-2xl text-center leading-tight"
+>
+  Rent Smarter, Move Faster.
+</motion.h1>
+
 
       {/* Subtext */}
       <motion.p
@@ -25,7 +26,7 @@ const Page = () => {
         transition={{ duration: 1.2, delay: 0.3 }}
         className="text-lg max-w-2xl mx-auto text-gray-300"
       >
-        Discover the perfect home for your next adventure. Find cozy spaces, luxury stays, and everything in between.
+       Find your perfect space—modern, affordable, and just a click away.
       </motion.p>
 
       {/* Call to Action Button */}

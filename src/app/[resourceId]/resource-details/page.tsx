@@ -78,7 +78,7 @@ const RentalPage: React.FC = () => {
   };
   async function getdata (){
     try{
-      const res = await fetch(`https://agent-with-me-backend.onrender.com/${resourceId}`)
+      const res = await fetch(`https://agent-with-me-backend.onrender.com/v1/${resourceId}`)
       const result = await res.json();
       await setdata(result)
       

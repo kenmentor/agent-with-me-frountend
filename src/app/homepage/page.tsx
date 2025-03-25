@@ -36,7 +36,7 @@ const Page: React.FC = () => {
         setLoading(true);
         setError(false);
         const res = await fetch(
-          `https://agent-with-me-backend.onrender.com/resources?keyword=${encodeURIComponent(
+          `https://agent-with-me-backend.onrender.com/v1/resources?keyword=${encodeURIComponent(
             keyword.searchWord
           )}&category=${encodeURIComponent(keyword.category.join())}`
         );
@@ -56,7 +56,7 @@ const Page: React.FC = () => {
 
   return (
     <>
-    <div className="min-h-screen bg-gray-50 text-gray-900">
+    <div className="min-h-screen bg-gray-50 text-gray-900 pt-16" >
       {/* Header Section */}
       <motion.header
         className="px-6 py-8 bg-blue-600 shadow-md text-white text-center"

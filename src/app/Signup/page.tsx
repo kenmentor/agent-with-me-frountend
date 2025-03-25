@@ -27,7 +27,7 @@ const SignupPage: React.FC = () => {
       return;
     }
 
-    fetch("https://agent-with-me-backend.onrender.com/signup", {
+    fetch("https://agent-with-me-backend.onrender.com/v1/signup", {
       method: "POST",
       body: JSON.stringify({
         email: form.email,

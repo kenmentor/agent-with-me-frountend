@@ -65,7 +65,7 @@ const UploadWizard = () => {
     });
     
 
-    fetch("http://localhost:3001/upload",{
+    fetch("http://localhost:3001/v1/upload",{
       method:"POST",
       body:data
     })

@@ -4,7 +4,7 @@
 
 /* Light Mode (Default) */
 body {
-  @apply font-sans bg-white text-gray-900 pt-16; /* Light background & dark text */
+  @apply font-sans bg-white text-gray-900 ; /* Light background & dark text */
 }
 
 a {
