@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { FaStar, FaMapMarkerAlt, FaHeart } from "react-icons/fa";
+import { FaStar, FaMapMarkerAlt, } from "react-icons/fa";
 import Link from "next/link";
 
 // Define the resource type

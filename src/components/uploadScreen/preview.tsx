@@ -1,5 +1,4 @@
 "use client"
-import React, { useState } from "react";
 interface formData {
     images: File[];
     thumbnail: File | null;
