@@ -36,7 +36,7 @@ const Page: React.FC = () => {
         setLoading(true);
         setError(false);
         const res = await fetch(
-          `https://agent-with-me-backend.onrender.com/v1/resources?keyword=${encodeURIComponent(
+          `http://localhost:3001/v1/resources?keyword=${encodeURIComponent(
             keyword.searchWord
           )}&category=${encodeURIComponent(keyword.category.join())}`
         );

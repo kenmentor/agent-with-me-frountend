@@ -32,6 +32,7 @@ const Upload3Two: React.FC<Upload3Two> = ({
       return {...prev,waterSuply:!(prev.waterSuply)}
     })
   }
+  console.log(formData.electricity)
   
   return (
     <div className="bg-gray-900 text-gray-300 p-6 rounded shadow-md max-w-4xl mx-auto">
@@ -54,7 +55,8 @@ const Upload3Two: React.FC<Upload3Two> = ({
 
            what is the level of power supply
             </h2>
-            <input type="range" min="0" max="0" value={formData.electricity} 
+            {formData.electricity}
+            <input type="range" min="0" max="100" value={formData.electricity} 
             onChange={(e)=> setFormData((prev:formData) =>({...prev ,electricity:Number(e.target.value)}))}/>
           </div>
 

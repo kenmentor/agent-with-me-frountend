@@ -28,18 +28,18 @@ const UploadWizard = () => {
   const [step, setStep] = useState<number>(1)
   const [canClick,setcanClick] = useState(true)
   const [formData, setFormData] = useState <formData> ({
-    title: "",
-    description: "",
+    title: "heh",
+    description: "jdjjd",
     files: [],
-    category: "",
+    category: "dhhdh",
     thumbnail: null,
-    price: "",
-    location: "",
+    price: "808646",
+    location: "egeg",
     images:[],
-    type:"",
-    address:"",
+    type:"djdj",
+    address:"djndj",
     state:"Calabar",
-    landmark:"",
+    landmark:"jdjdj",
     waterSuply:true,
     electricity:90,
   });
@@ -72,7 +72,7 @@ const UploadWizard = () => {
 
 
 
-    fetch("https://agent-with-me-backend.onrender.com/v1/upload",{
+    fetch("http://agent-with-me-backend.onrender.com/v1/upload",{
       method:"POST",
       body:data
     })

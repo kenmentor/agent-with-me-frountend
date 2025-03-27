@@ -6,7 +6,7 @@ import { BiLoaderAlt } from "react-icons/bi";
 
 const Loading = () => {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-950 text-gray-300">
+    <div className="min-h-screen flex flex-col items-center justify-center">
       {/* Animated Loader Icon */}
       <motion.div
         className="relative flex items-center justify-center"
@@ -14,7 +14,7 @@ const Loading = () => {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5, ease: "easeInOut" }}
       >
-        <BiLoaderAlt className="animate-spin text-blue-500 drop-shadow-lg" size={60} />
+        <BiLoaderAlt className="animate-spin text-blue-500 drop-shadow" size={60} />
       </motion.div>
 
       {/* Subtle Loading Text */}
@@ -28,7 +28,7 @@ const Loading = () => {
       </motion.p>
 
       {/* Glowing effect */}
-      <div className="absolute w-20 h-20 bg-blue-500 opacity-20 rounded-full blur-3xl animate-pulse"></div>
+      <div className="absolute w-20 h-20 opacity-20 rounded-full blur-3xl animate-pulse"></div>
     </div>
   );
 };
