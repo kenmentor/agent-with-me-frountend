@@ -42,7 +42,7 @@ const Page: React.FC = () => {
         );
         
         const result = await res.json();
-        setData(result);
+        setData(result.data);
         console.log(result)
       } catch (error) {
         console.error("Error fetching data:", error);

@@ -80,7 +80,9 @@ const RentalPage: React.FC = () => {
     try{
       const res = await fetch(`https://agent-with-me-backend.onrender.com/v1/${resourceId}`)
       const result = await res.json();
-      await setdata(result)
+      setSelectedImage(result.thumbnail)
+      await setdata(result.data)
+      
       
     }
    catch{ 
