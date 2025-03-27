@@ -34,7 +34,7 @@ const Upload3Two: React.FC<Upload3Two> = ({
   }
   
   return (
-    <div className="bg-gray-900 text-gray-300 p-6 rounded-lg shadow-md max-w-4xl mx-auto">
+    <div className="bg-gray-900 text-gray-300 p-6 rounded shadow-md max-w-4xl mx-auto">
       <h2 className="text-2xl font-semibold text-gray-100 mb-6">
         Step 2: Select Category
       </h2>
@@ -44,12 +44,12 @@ const Upload3Two: React.FC<Upload3Two> = ({
           Choose the category that best fits your rental property.
         </p>
 
-        <div className="grid gap-10">
-          <div className={`p-3 border rounded-lg cursor-pointer text-center transition flex  items-center `}>
+        <div className="flex gap-10 flex-col">
+          <div className={`p-3 border rounded cursor-pointer text-center transition flex  items-center `}>
            <h2 className=" text-white text-nowrap font-semibold " onClick={handleWater}> Is There Water Supply</h2>
            <input type="checkbox" height={"100"} />
           </div>
-          <div className={`p-3 border rounded-lg cursor-pointer text-center transition "border-blue-500 bg-gray-800`}>
+          <div className={`p-3 border rounded cursor-pointer text-center transition "border-blue-500 bg-gray-800`}>
             <h2 className=" text-white text-nowrap font-semibold ">
 
            what is the level of power supply
@@ -65,14 +65,14 @@ const Upload3Two: React.FC<Upload3Two> = ({
         <button
           type="button"
           onClick={goToPreviousStep}
-          className="px-6 py-2 bg-gray-700 text-gray-300 rounded-lg hover:bg-gray-800 transition"
+          className="px-6 py-2 bg-gray-700 text-gray-300 rounded hover:bg-gray-800 transition"
         >
           Previous
         </button>
         <button
           type="button"
           onClick={goToNextStep}
-          className="px-6 py-2 bg-blue-600 text-gray-100 rounded-lg hover:bg-blue-700 transition"
+          className="px-6 py-2 bg-blue-600 text-gray-100 rounded hover:bg-blue-700 transition"
         >
           Next
         </button>

@@ -43,7 +43,7 @@ const StepOne: React.FC<StepOneProps> = ({ formData, setFormData, goToNextStep }
   };
 
   return (
-    <div className="bg-gray-900 text-gray-300 p-6 rounded-lg shadow-md max-w-4xl mx-auto">
+    <div className="bg-gray-900 text-gray-300 p-6 rounded shadow-md max-w-4xl mx-auto">
       <h2 className="text-2xl font-semibold text-gray-100 mb-6">Step 1: Upload Files</h2>
       
       <div className="space-y-4">
@@ -91,7 +91,7 @@ const StepOne: React.FC<StepOneProps> = ({ formData, setFormData, goToNextStep }
       
       <div className="grid grid-cols-3 gap-4 mt-4">
         {formData.files.map((file, index) => (
-          <div key={index} className="relative w-full h-32 border border-gray-700 rounded-lg overflow-hidden">
+          <div key={index} className="relative w-full h-32 border border-gray-700 rounded overflow-hidden">
             <Image src={URL.createObjectURL(file)} alt={file.name} className="w-full h-full object-cover" fill={true}/>
           </div>
         ))}
@@ -101,7 +101,7 @@ const StepOne: React.FC<StepOneProps> = ({ formData, setFormData, goToNextStep }
         <button
           type="button"
           onClick={goToNextStep}
-          className="px-6 py-2 bg-blue-600 text-gray-100 rounded-lg hover:bg-blue-700 transition"
+          className="px-6 py-2 bg-blue-600 text-gray-100 rounded hover:bg-blue-700 transition"
         >
           Next
         </button>
