@@ -113,7 +113,7 @@ if (data.category=="Minimal"){
   return (
     <>
    
-    <div className="max-w-6xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+    <div className="max-w-6xl mx-auto p-6 bg-white shadow-lg rounded">
       {/* Header & Rating */}
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold text-gray-900">{data.title}</h1>
@@ -127,39 +127,39 @@ if (data.category=="Minimal"){
      
 
       {/* Main Image */}
-      <div className="relative w-full h-80 mt-4 rounded-lg overflow-hidden cursor-pointer"
+      <div className="relative w-full h-80 mt-4 rounded overflow-hidden cursor-pointer"
            onClick={() => setModalOpen(true)}>
         <Image src={selectedImage} alt={data.title} layout="fill" objectFit="cover"
-               className="rounded-lg transition duration-300 hover:opacity-80" />
+               className="rounded transition duration-300 hover:opacity-80" />
       </div>
 
       {/* Image Gallery - Slider */}
       <div className="flex mt-4 gap-2 overflow-x-auto hide-scrollbar">
         {data.gallery.map((image, index) => (
-          <div key={index} className={`relative w-24 h-24 rounded-lg overflow-hidden cursor-pointer 
+          <div key={index} className={`relative w-24 h-24 rounded overflow-hidden cursor-pointer 
                   ${selectedImage === image ? "border-4 border-blue-500" : ""}`}
                onClick={() => handleImageClick(index)}>
             <Image src={image} alt={image} layout="fill" objectFit="cover"
-                   className="rounded-lg transition-transform duration-200 hover:scale-105" />
+                   className="rounded transition-transform duration-200 hover:scale-105" />
           </div>
         ))}
       </div>
 
       {/* Pricing & Booking */}
-      <div className="mt-6 p-4 bg-gray-100 rounded-lg">
+      <div className="mt-6 p-4 bg-gray-100 rounded">
         <p className="text-lg font-semibold  text-gray-800">
         ₦{data.price.toLocaleString()} <span className="text-sm text-gray-300">/ per year</span>
         </p>
         <p className="text-gray-600">{data.type} • 2 {(data.waterSuply)? "with water":"without water "} •  <div className="inline  bg-gray-200 rounded-xl px-2  py-1  text-center " >
       <p className={`${categoryStyle} inline`}>{data.category}</p>
         </div></p>
-        <button className="mt-4 w-full bg-orange-500 text-white py-2 rounded-lg font-semibold hover:bg-orange-600 transition">
+        <button className="mt-4 w-full bg-orange-500 text-white py-2 rounded font-semibold hover:bg-orange-600 transition">
         Rent Now 
         </button>
 
         {/* WhatsApp Contact Button */}
         <button onClick={handleWhatsAppContact}
-                className="mt-3 w-full flex items-center justify-center gap-2 bg-green-500 text-white py-2 rounded-lg font-semibold hover:bg-green-600 transition">
+                className="mt-3 w-full flex items-center justify-center gap-2 bg-green-500 text-white py-2 rounded font-semibold hover:bg-green-600 transition">
           <FaWhatsapp className="text-xl" />
           Contact via WhatsApp
         </button>

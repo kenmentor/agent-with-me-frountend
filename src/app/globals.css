@@ -10,12 +10,12 @@ body {
 a {
   padding: 0;
   margin: 0;
-  color: #007acc; /* A professional blue shade */
+  color: #00cc55; /* A professional blue shade */
   transition: color 0.3s ease-in-out;
 }
 
 a:hover {
-  color: #005a9e; /* Darker shade on hover */
+  color: #009e54; /* Darker shade on hover */
 }
 
 /* Dark Mode */
@@ -40,7 +40,7 @@ a:hover {
 
 /* Form Inputs Styling */
 input, textarea {
-  @apply p-3 border border-gray-300 rounded-md w-full;
+  @apply p-3 border border-gray-300 rounded w-full;
   transition: border-color 0.3s ease-in-out;
 }
 
@@ -50,7 +50,7 @@ input:focus, textarea:focus {
 
 /* Buttons */
 button {
-  @apply bg-blue-600 text-white p-3 rounded-md;
+  @apply bg-blue-600 text-white p-3 rounded;
   transition: background-color 0.3s ease-in-out;
 }
 

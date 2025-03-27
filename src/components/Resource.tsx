@@ -31,7 +31,7 @@ const Resource = ({
   console.log(thumbnail)
   return (
     <motion.div
-      className="relative bg-white rounded-xl overflow-hidden border border-gray-300 shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer"
+      className="relative  bg-gray-50 rounded-xl overflow-hidden border border-gray-300 shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer"
       whileTap={{ scale: 0.98 }}
       transition={{ duration: 0.3 }}
     >
@@ -42,9 +42,9 @@ const Resource = ({
         </span>
       )}
       {/* Favor<Image width={50}  src={"https://res.cloudinary.com/ddbgv75bn/image/upload/v1738627025/thumbnails/vravqbbs7cizijqq6gqa.png"} alt="try" ite Button */}
-      <button className="absolute top-3 right-3 bg-white p-2 rounded-full shadow hover:bg-gray-200">
+      {/* <button className="absolute top-3 right-3 bg-white p-2 rounded-full shadow hover:bg-gray-200">
         <FaHeart className="text-red-500" />
-      </button>
+      </button> */}
 
       {/* Thumbnail Section */}
       <div className="relative h-52 w-full overflow-hidden">
@@ -63,7 +63,7 @@ const Resource = ({
         {/* Title, Price & Category */}
         <div className="flex justify-between items-center">
           <h2 className="text-lg font-semibold text-gray-900 truncate">{header}</h2>
-          <span className="text-lg font-bold text-indigo-600">₦{price.toLocaleString()}</span>
+          <span className="text-lg font-bold text-blue-500">₦{price.toLocaleString()}</span>
         </div>
 
         {/* Landmark & Category */}
@@ -86,7 +86,7 @@ const Resource = ({
         {/* View Details Button */}
         <Link
           href={`/${id}/resource-details`}
-          className="block text-center text-white bg-indigo-600 hover:bg-indigo-700 transition-all duration-300 py-2 rounded-lg font-medium"
+          className="block text-center text-white  bg-blue-600 hover:bg-blue-700 transition-all duration-300 py-2 rounded font-medium hover:text-blue-500"
         >
           View Details
         </Link>

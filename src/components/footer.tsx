@@ -16,19 +16,19 @@ const Footer = () => {
 
         {/* Center Section - Quick Links */}
         <div className="text-center">
-          <h3 className="text-lg font-medium text-gray-900">Quick Links</h3>
+          <h3 className="text-lg font-medium  text-blue-900">Quick Links</h3>
           <ul className="mt-3 space-y-2">
-            <li><Link href="/" className="hover:text-blue-600 transition-colors">Home</Link></li>
-            <li><Link href="/about" className="hover:text-blue-600 transition-colors">About</Link></li>
-            <li><Link href="/resources" className="hover:text-blue-600 transition-colors">Resources</Link></li>
-            <li><Link href="/contact" className="hover:text-blue-600 transition-colors">Contact</Link></li>
+            <li><Link href="/" className="hover: text-blue-600 transition-colors">Home</Link></li>
+            <li><Link href="/about" className="hover: text-blue-600 transition-colors">About</Link></li>
+            <li><Link href="/resources" className="hover: text-blue-600 transition-colors">Resources</Link></li>
+            <li><Link href="/contact" className="hover: text-blue-600 transition-colors">Contact</Link></li>
           </ul>
         </div>
 
         {/* Right Section - Socials */}
         <div className="text-center md:text-right">
           <h3 className="text-lg font-medium text-gray-900">Follow Us</h3>
-          <div className="mt-3 flex justify-center md:justify-end gap-4">
+          <div className="mt-3 flex justify-center md:justify-end gap-4 ">
             <Link href="#" className="p-3 rounded-full bg-gray-200 hover:bg-blue-600 hover:text-white transition-all">
               <FaFacebookF />
             </Link>

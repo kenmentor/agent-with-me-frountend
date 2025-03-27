@@ -24,7 +24,7 @@ const SearchBar = ({ setKeyword }: SearchBarProps) => {
         <input
           type="text"
           placeholder="Search for resources..."
-          className="w-full h-12 pl-12 pr-4 rounded-md bg-gray-100 text-gray-700 placeholder-gray-500 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full h-12 pl-12 pr-4 rounded bg-gray-100 text-gray-700 placeholder-gray-500 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
           onChange={handleChange}
         />
         {/* Search Icon Inside Input */}
