@@ -86,7 +86,7 @@ const UploadWizard = () => {
   };
   console.log((100/6)*step)
   return (
-    <div className="max-w-full mx-auto h-full p-6  shadow-lg  ">
+    <div className="max-w-full mx-auto h-full p-6    ">
       {/* Progress Tracker */}
       <div className="flex justify-between mb-6 w-full bg-gray-300 transition- rounded-full overflow-hidden  ">
         <div className="flex bg-blue-700 h-5 rounded-full duration-1000" style={{

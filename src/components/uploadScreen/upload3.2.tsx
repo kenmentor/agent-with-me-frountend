@@ -34,7 +34,7 @@ const Upload3Two: React.FC<Upload3Two> = ({
   }
   
   return (
-    <div className="bg-gray-900 text-gray-300 p-6 rounded  max-w-4xl mx-auto">
+    <div className="bg-gray-900 text-gray-300 p-6 rounded shadow-md max-w-4xl mx-auto">
       <h2 className="text-2xl font-semibold text-gray-100 mb-6">
         Step 2: Select Category
       </h2>
