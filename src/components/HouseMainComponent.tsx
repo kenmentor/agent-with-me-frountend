@@ -1,11 +1,13 @@
 "use client";
 
 import Resource from "@/components/Resource";
+import SearchBar from "@/components/SearchBar";
 import React, { useEffect, useState } from "react";
+import Searchbox from "@/components/searchbox";
 import Loading from "@/components/Loainding";
 import Error from "@/components/Erro";
 import { motion } from "framer-motion";
-
+import Footer from "@/components/footer";
 // Define resource type
 interface ResourceType {
   header: string;
@@ -17,9 +19,9 @@ interface ResourceType {
   landmark: string;
   gallery: { src: string; alt: string }[];
   price: number;
-  _id:string;
-  waterSuply:boolean;
   electricity:number;
+  waterSuply:boolean;
+  _id:string;
 }
 interface keyword { 
   searchWord: string;
@@ -30,16 +32,17 @@ interface keyword {
    location:string;
    limit:number;
   }
-interface HouseMainComponent {
-keyword:keyword;
-bardge:number
 
-}
+ interface HouseMainComponent {
+    keyword:keyword;
+    bardge:number;
+ }
 const HouseMainComponent: React.FC<HouseMainComponent> = ({keyword,bardge}) => {
-
+  
   const [data, setData] = useState<ResourceType[]>([]);
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
+console.log(keyword)
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -48,18 +51,19 @@ const HouseMainComponent: React.FC<HouseMainComponent> = ({keyword,bardge}) => {
         const res = await fetch(
           `https://agent-with-me-backend.onrender.com/v1/resources?keyword=${encodeURIComponent(
             keyword.searchWord
-          )}&category=${keyword.category}&min=${keyword.min}&max=${keyword.max}&type=${keyword.type}&location=${keyword.location} limit=${keyword.limit} bardge=${bardge}`
+          )}&category=${keyword.category}&type=${keyword.type}&location=${keyword.location}&min=${keyword.min}&max=${keyword.max}&bardge=${bardge}&limit=${keyword.limit}`
         );
         
         const result = await res.json();
         setData((prev:ResourceType[])=>{
-            if(bardge<= 1){return result.data}
-            else{
-                return [...prev,result.data]
-            }
+          if(bardge<=1){ return result.data}
+          else{ return [...prev,result.data]}
+
+         
         });
         console.log(result)
       } catch (error) {
+
         console.error("Error fetching data:", error);
         setError(true);
       } finally {
@@ -70,8 +74,8 @@ const HouseMainComponent: React.FC<HouseMainComponent> = ({keyword,bardge}) => {
   }, [keyword]);
 
   return (
-    <>
       <main className="px-6 py-10">
+      
         {loading ? (
           <Loading />
         ) : error ? (
@@ -83,9 +87,20 @@ const HouseMainComponent: React.FC<HouseMainComponent> = ({keyword,bardge}) => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
           >
+            <Resource
+                key={"jru"}
+                thumbnail={"/de/d"}
+                id={"rr"}
+                header={"two bed room flat for sale"}
+                rating={9}
+                gallery={[]}
+                landmark={"esuk otu"}
+                price={ 250000}
+                electricity={89}
+                waterSuply={false}
+             />
             {data.length > 0 ? (
               data.map((resource) => (
-   
                 <Resource
                   key={resource._id}
                   thumbnail={resource.thumbnail||"/de/d"}
@@ -102,10 +117,13 @@ const HouseMainComponent: React.FC<HouseMainComponent> = ({keyword,bardge}) => {
             ) : (
               <p className="text-gray-500 text-center col-span-full">No results found</p>
             )}
+             
           </motion.div>
         )}
+         
       </main> 
-    </>
+
+   
   );
 };
 

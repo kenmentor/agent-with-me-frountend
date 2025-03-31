@@ -1,10 +1,11 @@
 "use client";
 
-
+import Resource from "@/components/Resource";
 import SearchBar from "@/components/SearchBar";
-import React, {  useState } from "react";
+import React, { useEffect, useState } from "react";
 import Searchbox from "@/components/searchbox";
-
+import Loading from "@/components/Loainding";
+import Error from "@/components/Erro";
 import { motion } from "framer-motion";
 import Footer from "@/components/footer";
 import HouseMainComponent from "@/components/HouseMainComponent";
@@ -19,9 +20,9 @@ interface ResourceType {
   landmark: string;
   gallery: { src: string; alt: string }[];
   price: number;
-  _id:string;
-  waterSuply:boolean;
   electricity:number;
+  waterSuply:boolean;
+  _id:string;
 }
 interface keyword { 
   searchWord: string;
@@ -29,22 +30,15 @@ interface keyword {
    min:string;
    max:string;
    type:string ;
-   location:string;
+   location:string
    limit:number;
   }
-
 const Page: React.FC = () => {
   const [keyword, setKeyword] = useState<keyword>(
-    { searchWord: "",
-      category: "string",
-      min:"",
-      max:"",
-      type:"" ,
-      location:"",
-      limit:50,}
+    { searchWord: "",min:"", max:"",type:"",category:"",location:"" ,limit:50}
   );
-  const [bardge,setbardge] = useState(1)
-     
+ const [bardge,setBardge]  = useState(1)
+
   return (
     <>
     <div className="min-h-screen bg-gray-50 text-gray-900 pt-16" >
@@ -63,13 +57,13 @@ const Page: React.FC = () => {
       <section className="px-6 py-6 bg-white shadow-sm">
         <div className="max-w-4xl mx-auto">
           <SearchBar setKeyword={setKeyword} />
+      
           <div className="mt-4">
-            <Searchbox setKeyword={setKeyword} min={keyword.min} max={keyword.max}/>
+            <Searchbox setKeyword={setKeyword} min={keyword.min} max={keyword.max} />
           </div>
         </div>
       </section>
 
-      {/* Main Content */}
       <HouseMainComponent keyword={keyword} bardge={bardge}/>
      
     </div>
