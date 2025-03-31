@@ -1,10 +1,13 @@
 import Link from "next/link";
 import React from "react";
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaTiktok } from "react-icons/fa";
+import Feedback from "./feedback";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-100 text-gray-700 py-10 mt-10">
+    <>
+    <Feedback/>
+    <footer className="bg-gray-100 text-gray-700 py-10 mt">
       <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* Left Section - Branding */}
         <div>
@@ -53,6 +56,7 @@ const Footer = () => {
         &copy; {new Date().getFullYear()} YourBrand. All rights reserved.
       </div>
     </footer>
+    </>
   );
 };
 

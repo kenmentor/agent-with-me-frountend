@@ -7,6 +7,7 @@ import StepFour from "./uploadScreen/preview";
 import Upload3One from "./uploadScreen/upload3.1";
 import Upload3Two from "./uploadScreen/upload3.2";
 import Loading from "./Loainding";
+import {ErroMessage, SuccessMessage}  from "./message";
 interface formData {
   images: File[];
   thumbnail: File | null;
@@ -26,7 +27,7 @@ interface formData {
 }
 const UploadWizard = () => {
   const [step, setStep] = useState<number>(1)
-  const [canClick,setcanClick] = useState(true)
+  const [loading,setloading] = useState(false)
   const [formData, setFormData] = useState <formData> ({
     title: "heh",
     description: "jdjjd",
@@ -43,11 +44,12 @@ const UploadWizard = () => {
     waterSuply:true,
     electricity:90,
   });
+  const [message,setMessage] = useState("")
 
   const goToNextStep = () => setStep((prev) => prev + 1);
   const goToPreviousStep = () => setStep((prev) => prev - 1);
   const  handleSubmit = async () => {
-    setcanClick(false)
+    console.log("started process data")
     try{
     
     const data  = new FormData()
@@ -72,16 +74,21 @@ const UploadWizard = () => {
 
 
 
-    fetch("http://agent-with-me-backend.onrender.com/v1/upload",{
+     fetch("http://agent-with-me-backend.onrender.com/v1/upload",{
       method:"POST",
       body:data
-    })
+    }).then((res)=>res.json()).then((result)=>   console.log("eeee",result))
+   
 
     }catch{
       console.log("erro occured while posting data")
+      setMessage("error")
     }
     finally{
-      setcanClick(true)
+      setMessage("offline")
+      console.log("sent")
+      console.log(message)
+
     }
   };
   console.log((100/6)*step)
@@ -94,15 +101,26 @@ const UploadWizard = () => {
         }}> </div>
       </div>
       {
-        !canClick&&<Loading/>
+        loading&&<Loading/>
       }
       {/* Step Components */}
+      {
+        (message == "error")&&
+        <ErroMessage setMessage ={setMessage}/>
+        
+        
+      }
+      {
+        (message == "success")&&
+        <SuccessMessage/>
+      }
+      
       {step === 1 && <StepOne formData={formData} setFormData={setFormData} goToNextStep={goToNextStep} />}
       {step === 2 && <StepTwo formData={formData} setFormData={setFormData} goToNextStep={goToNextStep} goToPreviousStep={goToPreviousStep} />}
       {step === 3 && <StepThree formData={formData} setFormData={setFormData} goToNextStep={goToNextStep} goToPreviousStep={goToPreviousStep} />}
       {step === 4 && <Upload3One formData={formData} goToPreviousStep={goToPreviousStep} goToNextStep={goToNextStep} setFormData={setFormData}/>}
       {step === 5 && <Upload3Two formData={formData} setFormData={setFormData} goToNextStep={goToNextStep} goToPreviousStep={goToPreviousStep} />}
-      {step === 6 && <StepFour formData={formData} goToPreviousStep={goToPreviousStep}  handleSubmit={handleSubmit} canClick={canClick}/>}
+      {step === 6 && <StepFour formData={formData} goToPreviousStep={goToPreviousStep}  handleSubmit={handleSubmit} />}
     </div>
   );
 };

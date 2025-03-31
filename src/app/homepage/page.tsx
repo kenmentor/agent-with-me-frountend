@@ -1,13 +1,13 @@
 "use client";
 
-import Resource from "@/components/Resource";
+
 import SearchBar from "@/components/SearchBar";
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import Searchbox from "@/components/searchbox";
-import Loading from "@/components/Loainding";
-import Error from "@/components/Erro";
+
 import { motion } from "framer-motion";
 import Footer from "@/components/footer";
+import HouseMainComponent from "@/components/HouseMainComponent";
 // Define resource type
 interface ResourceType {
   header: string;
@@ -20,40 +20,31 @@ interface ResourceType {
   gallery: { src: string; alt: string }[];
   price: number;
   _id:string;
+  waterSuply:boolean;
+  electricity:number;
 }
+interface keyword { 
+  searchWord: string;
+   category: string;
+   min:string;
+   max:string;
+   type:string ;
+   location:string;
+   limit:number;
+  }
 
 const Page: React.FC = () => {
-  const [keyword, setKeyword] = useState<{ searchWord: string; category: string[] }>(
-    { searchWord: "", category: [] }
+  const [keyword, setKeyword] = useState<keyword>(
+    { searchWord: "",
+      category: "string",
+      min:"",
+      max:"",
+      type:"" ,
+      location:"",
+      limit:50,}
   );
-  const [data, setData] = useState<ResourceType[]>([]);
-  const [error, setError] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        setError(false);
-        const res = await fetch(
-          `https://agent-with-me-backend.onrender.com/v1/resources?keyword=${encodeURIComponent(
-            keyword.searchWord
-          )}&category=${encodeURIComponent(keyword.category.join())}`
-        );
-        
-        const result = await res.json();
-        setData(result.data);
-        console.log(result)
-      } catch (error) {
-        console.error("Error fetching data:", error);
-        setError(true);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, [keyword]);
-
+  const [bardge,setbardge] = useState(1)
+     
   return (
     <>
     <div className="min-h-screen bg-gray-50 text-gray-900 pt-16" >
@@ -73,44 +64,13 @@ const Page: React.FC = () => {
         <div className="max-w-4xl mx-auto">
           <SearchBar setKeyword={setKeyword} />
           <div className="mt-4">
-            <Searchbox setKeyword={setKeyword} />
+            <Searchbox setKeyword={setKeyword} min={keyword.min} max={keyword.max}/>
           </div>
         </div>
       </section>
 
       {/* Main Content */}
-      <main className="px-6 py-10">
-        {loading ? (
-          <Loading />
-        ) : error ? (
-          <Error />
-        ) : (
-          <motion.div
-            className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-          >
-            {data.length > 0 ? (
-              data.map((resource) => (
-                <Resource
-                  key={resource._id}
-                  thumbnail={resource.thumbnail||"/de/d"}
-                  id={resource._id}
-                  header={resource.header}
-                  rating={resource.rating}
-                  gallery={resource.gallery}
-                  landmark={resource.landmark}
-                  price={resource.price || 200000}
-                />
-              ))
-            ) : (
-              <p className="text-gray-500 text-center col-span-full">No results found</p>
-            )}
-          </motion.div>
-        )}
-         
-      </main>
+      <HouseMainComponent keyword={keyword} bardge={bardge}/>
      
     </div>
     <Footer/>

@@ -10,12 +10,12 @@ body {
 a {
   padding: 0;
   margin: 0;
-  color: #00cc55; /* A professional blue shade */
+  color: #0059ff; /* A professional blue shade */
   transition: color 0.3s ease-in-out;
 }
 
 a:hover {
-  color: #009e54; /* Darker shade on hover */
+  color: #0156a5; /* Darker shade on hover */
 }
 
 /* Dark Mode */

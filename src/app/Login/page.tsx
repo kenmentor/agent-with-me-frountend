@@ -4,6 +4,7 @@ import React, { ChangeEvent, useState } from "react";
 import { motion } from "framer-motion";
 import { BsGoogle } from "react-icons/bs";
 
+
 const Login: React.FC = () => {
   const [form, setForm] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
@@ -22,12 +23,14 @@ const Login: React.FC = () => {
         method: "POST",
         body: JSON.stringify(form),
         headers: { "Content-Type": "application/json" },
-      });
+      })
+      const {ok,data} = await res.json()
 
-      if (!res.ok) throw new Error("Invalid email or password");
+      if (!ok) throw new Error("Invalid email or password");
       console.log("Login successful");
+      localStorage.setItem("token",data)
     } catch {
-      setError("erro");
+      setError("incorrect username or password");
     } finally {
       setLoading(false);
     }
@@ -35,6 +38,7 @@ const Login: React.FC = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 text-gray-900">
+     
       <motion.div
         className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-sm border border-gray-300"
         initial={{ opacity: 0, y: 30 }}
@@ -83,6 +87,7 @@ const Login: React.FC = () => {
         </div>
       </motion.div>
     </div>
+    
   );
 };
 

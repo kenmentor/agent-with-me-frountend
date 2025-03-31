@@ -1,5 +1,6 @@
 import Image from "next/image";
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 interface formData {
   images: File[];
   thumbnail: File | null;
@@ -23,7 +24,9 @@ interface StepOneProps {
   setFormData: React.Dispatch<React.SetStateAction<formData>>;
   goToNextStep: () => void;
 }
-
+const landmarks = [
+  "cscc"
+]
 const StepOne: React.FC<StepOneProps> = ({ formData, setFormData, goToNextStep }) => {
   const [error, setError] = useState<string | null>(null);
 
@@ -69,6 +72,8 @@ const StepOne: React.FC<StepOneProps> = ({ formData, setFormData, goToNextStep }
           className="w-full p-3 bg-gray-800 text-white rounded-md focus:outline-none focus:ring focus:ring-blue-400"
         />
         
+       
+        
 
         <textarea
           placeholder="Enter description"
@@ -76,6 +81,26 @@ const StepOne: React.FC<StepOneProps> = ({ formData, setFormData, goToNextStep }
           onChange={(e) => setFormData((prev: formData) => ({ ...prev, description: e.target.value }))}
           className="w-full p-3 bg-gray-800 text-white rounded-md focus:outline-none focus:ring focus:ring-blue-500"
         />
+         <select name="landmark" 
+        id="landmark"  
+        onChange={(e) => setFormData((prev: formData) => ({ ...prev, address: e.target.value }))}
+        className="w-full p-3 bg-gray-800 text-white rounded-md focus:outline-none focus:ring focus:ring-blue-400"
+        >
+          <option value="">
+            Landmark
+          </option>
+          {landmarks.map((element, index) => (
+        
+        <motion.option
+         key={index}
+         whileTap={{ scale: 0.9 }}
+         value={element}
+       >{element}
+
+         </motion.option>
+      
+     ))}
+        </select>
       </div>
       
       <div className="mt-4">

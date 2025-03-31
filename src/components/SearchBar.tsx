@@ -2,9 +2,18 @@ import React from "react";
 import { FaSearch } from "react-icons/fa";
 
 // Define types for props
+interface keyword { 
+  searchWord: string;
+   category: string;
+   min:string;
+   max:string;
+   type:string ;
+   location:string
+   limit:number;
+  }
 type SearchBarProps = {
   setKeyword: React.Dispatch<
-    React.SetStateAction<{ searchWord: string; category: string[] }>
+    React.SetStateAction<keyword>
   >;
 };
 
@@ -24,7 +33,7 @@ const SearchBar = ({ setKeyword }: SearchBarProps) => {
         <input
           type="text"
           placeholder="Search for resources..."
-          className="w-full h-12 pl-12 pr-4 rounded bg-gray-100 text-gray-700 placeholder-gray-500 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
+          className="w-full h-12 pl-12 pr-4 rounded bg-gray-100 text-gray-700 placeholder-gray-500 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
           onChange={handleChange}
         />
         {/* Search Icon Inside Input */}

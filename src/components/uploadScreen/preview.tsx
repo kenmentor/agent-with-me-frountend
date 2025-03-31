@@ -14,10 +14,10 @@ interface StepFourProps {
     formData:formData;
   goToPreviousStep: () => void;
   handleSubmit: () => void;
-  canClick:boolean;
+
 }
 
-const StepFour: React.FC<StepFourProps> = ({ formData, goToPreviousStep, handleSubmit ,canClick}) => {
+const StepFour: React.FC<StepFourProps> = ({ formData, goToPreviousStep, handleSubmit }) => {
   
   return (
     <div className="bg-gray-900 text-gray-300 p-6 rounded-lg shadow-md max-w-4xl mx-auto">
@@ -61,8 +61,8 @@ const StepFour: React.FC<StepFourProps> = ({ formData, goToPreviousStep, handleS
         <button
           type="button"
           onClick={handleSubmit}
-          className={`px-6 py-2 ${!canClick&&"bg-green-700 cursor-not-allowed" } bg-green-600 text-gray-100 rounded-lg hover:bg-green-700 transition`}
-          disabled={!canClick}
+          className={`px-6 py-2  bg-green-600 text-gray-100 rounded-lg hover:bg-green-700 transition`}
+          
         >
           Submit
         </button>
