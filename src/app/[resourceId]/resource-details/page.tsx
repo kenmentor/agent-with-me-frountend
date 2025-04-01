@@ -203,7 +203,7 @@ if (data.category=="Minimal"){
       </AnimatePresence>
     </div>
   
-    <HouseMainComponent keyword={{searchWord:"",category:data.category,min:`${data.price-10000}`,max:"",type:data.type,location:"",limit:6}} bardge={1} />
+    {/* <HouseMainComponent keyword={{searchWord:"",category:data.category,min:`${data.price-10000}`,max:"",type:data.type,location:"",limit:6}} bardge={1} /> */}
     <Footer/>
     </>
   );
