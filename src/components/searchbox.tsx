@@ -49,7 +49,7 @@ const Searchbox = ({ setKeyword, min, max }: SearchboxProps) => {
         : [...prev, category]
     );
   };
-
+console.log(activeCategories)
   function onclickPrice() {
     setPrice((prev) => !prev);
   }
