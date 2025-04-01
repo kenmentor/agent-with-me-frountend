@@ -97,7 +97,7 @@ const UploadWizard = () => {
   return (
     <div className="max-w-full mx-auto h-full p-6">
       {/* Header with Back Arrow and Progress Tracker */}
-      <div className="flex flex-col sm:flex-row justify-between items-center sm:gap-6 text-white mb-6">
+      <div className="flex  sm:flex-row justify-between items-center sm:gap-6 text-white mb-6">
         <Link href={"/homepage"}>
           <MdArrowBackIos className="h-8 w-8 text-white" />
         </Link>
