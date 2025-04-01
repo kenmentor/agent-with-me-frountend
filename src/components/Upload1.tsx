@@ -8,6 +8,8 @@ import Upload3One from "./uploadScreen/upload3.1";
 import Upload3Two from "./uploadScreen/upload3.2";
 import Loading from "./Loainding";
 import {ErroMessage, SuccessMessage}  from "./message";
+import { MdArrowBackIos } from "react-icons/md";
+import Link from "next/link";
 interface formData {
   images: File[];
   thumbnail: File | null;
@@ -93,12 +95,15 @@ const UploadWizard = () => {
   };
   console.log((100/6)*step)
   return (
-    <div className="max-w-full mx-auto h-full p-6    ">
+  
+    <div className="max-w-full mx-auto h-full p-6  ">
+     <div className="flex gap- items-center text-white"> <Link href={"/homepage"}><MdArrowBackIos className="h-8 w-8 text-white "/></Link>
       {/* Progress Tracker */}
-      <div className="flex justify-between mb-6 w-full bg-gray-300 transition- rounded-full overflow-hidden  ">
-        <div className="flex bg-blue-700 h-5 rounded-full duration-1000" style={{
+      <div className="flex justify-between  w-full bg-gray-300 transition- rounded-full overflow-hidden h-4">
+        <div className="flex bg-blue-700 h-full rounded-full duration-1000" style={{
           width:`${((step-1)/5)*100}%`
         }}> </div>
+      </div>
       </div>
       {
         loading&&<Loading/>

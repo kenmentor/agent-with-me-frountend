@@ -83,7 +83,7 @@ const StepOne: React.FC<StepOneProps> = ({ formData, setFormData, goToNextStep }
         />
          <select name="landmark" 
         id="landmark"  
-        onChange={(e) => setFormData((prev: formData) => ({ ...prev, address: e.target.value }))}
+        onChange={(e) => setFormData((prev: formData) => ({ ...prev, landmark: e.target.value }))}
         className="w-full p-3 bg-gray-800 text-white rounded-md focus:outline-none focus:ring focus:ring-blue-400"
         >
           <option value="">

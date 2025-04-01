@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useParams } from "next/navigation";
 import Footer from "@/components/footer";
 import HouseMainComponent from "@/components/HouseMainComponent";
+import HeaderCustom from "@/components/HeaderCostum";
 	
 
 
@@ -115,8 +116,9 @@ if (data.category=="Minimal"){
 
   return (
     <>
-   
-    <div className="max-w-6xl mx-auto p-6 bg-white shadow-lg rounded">
+    
+  <HeaderCustom text={data.title} showBackButton={true}/>
+    <div className="max-w-6xl mx-auto p-6 bg-white shadow-lg rounded mt-13">
       {/* Header & Rating */}
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold text-gray-900">{data.title}</h1>
