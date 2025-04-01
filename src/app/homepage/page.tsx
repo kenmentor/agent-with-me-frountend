@@ -28,15 +28,23 @@ const Page: React.FC = () => {
     <>
     <div className="min-h-screen bg-gray-50 text-gray-900 pt-16" >
       {/* Header Section */}
-      <motion.header
-        className="px-6 py-8 bg-blue-600 shadow-md text-white text-center"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        <h1 className="text-3xl font-bold">Find Your Perfect Home</h1>
-        <p className="text-gray-200">Browse thousands of listings to find your ideal apartment</p>
-      </motion.header>
+   
+  <motion.header
+    className="px-6 py-8 bg-blue-600 shadow-md text-white text-center rounded-lg"
+    initial={{ opacity: 0, y: -20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.8, ease: "easeOut" }}
+  >
+    <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight">
+      Find Your Perfect Home
+    </h1>
+    <p className="mt-2 text-lg sm:text-xl text-gray-200">
+      Browse thousands of listings to find your ideal apartment
+    </p>
+  </motion.header>
+);
+
+export default AnimatedHeader;
 
       {/* Search Section */}
       <section className="px-6 py-6 bg-white shadow-sm">
