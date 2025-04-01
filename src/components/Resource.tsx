@@ -30,7 +30,6 @@ const Resource = ({
   price,
   id,
   landmark,
-  rating,
   category = "Luxury",
   isNew = false,
   electricity ,

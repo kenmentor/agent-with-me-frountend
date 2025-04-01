@@ -1,13 +1,10 @@
 "use client";
 
 import Resource from "@/components/Resource";
-import SearchBar from "@/components/SearchBar";
 import React, { useEffect, useState } from "react";
-import Searchbox from "@/components/searchbox";
 import Loading from "@/components/Loainding";
 import Error from "@/components/Erro";
 import { motion } from "framer-motion";
-import Footer from "@/components/footer";
 // Define resource type
 interface ResourceType {
   header: string;

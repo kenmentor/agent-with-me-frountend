@@ -60,6 +60,7 @@ const Searchbox = ({ setKeyword ,min,max}: SearchboxProps) => {
   const [activeCategories, setActiveCategories] = useState<string[]>([]);
   const [price,setPrice] = useState(false)
   // Toggle category selection
+  console.log(activeCategories)
   const toggleCategory = (category: string) => {
     setActiveCategories((prev) =>
       prev.includes(category)
@@ -69,16 +70,7 @@ const Searchbox = ({ setKeyword ,min,max}: SearchboxProps) => {
   };
 
   // Update the `setKeyword` state when categories change
-  function onSelect(e:React.ChangeEvent<HTMLInputElement>){
-    const name = e.target.name
-    const value= e.target.value 
-    console.log(name,value)
-    setKeyword((prev)=>(
-      {
-        ...prev,[name]:value
-      }
-    ))
-  }
+  
   function onclickPrice(){
     setPrice((prev)=>!prev)
   }
@@ -109,7 +101,16 @@ const Searchbox = ({ setKeyword ,min,max}: SearchboxProps) => {
             "bg-blue-600 text-white hover:bg-blue-700 hover:text-white"
           }`}
           name={category.name}
-          onChange={onSelect}
+          onChange={(e)=>{
+            const name = e.target.name
+            const value= e.target.value 
+            console.log(name,value)
+            setKeyword((prev)=>(
+              {
+                ...prev,[name]:value
+              }
+            ))
+          }}
         
           
           

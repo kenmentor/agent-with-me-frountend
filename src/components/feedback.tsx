@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { FaFaceFrown, FaFaceSadCry, FaFaceSmile, FaFaceSmileWink } from 'react-icons/fa6'
-import Resource from './Resource'
+
 
 const Feedback = () => {
   const[data,setdata] = useState("")

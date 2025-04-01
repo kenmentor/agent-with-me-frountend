@@ -1,29 +1,14 @@
 "use client";
 
-import Resource from "@/components/Resource";
+
 import SearchBar from "@/components/SearchBar";
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import Searchbox from "@/components/searchbox";
-import Loading from "@/components/Loainding";
-import Error from "@/components/Erro";
 import { motion } from "framer-motion";
 import Footer from "@/components/footer";
 import HouseMainComponent from "@/components/HouseMainComponent";
 // Define resource type
-interface ResourceType {
-  header: string;
-  views: number;
-  description: string;
-  rating: number;
-  id: string;
-  thumbnail: string;
-  landmark: string;
-  gallery: { src: string; alt: string }[];
-  price: number;
-  electricity:number;
-  waterSuply:boolean;
-  _id:string;
-}
+
 interface keyword { 
   searchWord: string;
    category: string;
@@ -58,15 +43,15 @@ const Page: React.FC = () => {
         <div className="max-w-4xl mx-auto">
           <SearchBar setKeyword={setKeyword} />
       
-          <div className="mt-4">
+          <div className="mt-4" onScroll={()=>setBardge(1)}>
             <Searchbox setKeyword={setKeyword} min={keyword.min} max={keyword.max} />
           </div>
-        </div>
+        </div >
       </section>
 
       <HouseMainComponent keyword={keyword} bardge={bardge}/>
      
-    </div>
+    </div >
     <Footer/>
     </>
   );

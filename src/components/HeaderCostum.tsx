@@ -1,12 +1,9 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { GoArrowLeft } from "react-icons/go";
 import { motion } from "framer-motion";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { MdArrowBackIos } from "react-icons/md";
-import { FaShare } from "react-icons/fa";
 import { CgShare } from "react-icons/cg";
 
 type HeaderProps = {
@@ -16,7 +13,7 @@ type HeaderProps = {
 
 const HeaderCustom = ({ text, showBackButton = true }: HeaderProps) => {
   const [isVisible, setIsVisible] = useState(true);
-  const router = useRouter();
+ 
 
   useEffect(() => {
     let lastScrollY = window.scrollY;

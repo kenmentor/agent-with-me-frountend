@@ -72,10 +72,7 @@ const UploadWizard = () => {
     formData.files.forEach((file)  => {
       data.append("files",file)
     });
-    
-
-
-
+    setloading(true)
      fetch("http://agent-with-me-backend.onrender.com/v1/upload",{
       method:"POST",
       body:data
@@ -87,6 +84,7 @@ const UploadWizard = () => {
       setMessage("error")
     }
     finally{
+      setloading(false)
       setMessage("offline")
       console.log("sent")
       console.log(message)
