@@ -73,18 +73,24 @@ const Resource = ({
         <p className="text-sm text-gray-500 flex items-center gap-1">
           <FaMapMarkerAlt className="text-red-500" /> {landmark}
         </p>
-        <div className="inline-flex gap-3 sm:text-xs">
-        <p className="text-xs font-medium text-indigo-500 bg-indigo-100 inline-block px-2 py-1 rounded-lg">
-          {category} {/* 🔥 Markup placeholder (Replace later) */}
-        </p>
-        <p className="text-xs inline-flex gap-1 items-center font-medium  text-yellow-500   bg-yellow-100 px-2 py-1 rounded-lg">
-            
-              <GiLightBulb/> power suply:{electricity} {""}%
-              </p>
-            <p className="text-xs inline-flex gap-1 items-center font-medium text-blue-500 bg-blue-100 px-2 py-1 rounded-lg">
-              waterSuply:{ waterSuply?<PiShowerBold/>:<FcCancel/>}{""}
-            </p>
-        </div>
+        <div className="flex flex-wrap gap-2 sm:gap-3 items-center">
+  {/* Category */}
+  <p className="text-[10px] sm:text-xs font-medium text-indigo-500 bg-indigo-100 px-2 py-1 rounded-lg">
+    {category}
+  </p>
+
+  {/* Power Supply */}
+  <p className="text-[10px] sm:text-xs flex items-center gap-1 font-medium text-yellow-500 bg-yellow-100 px-2 py-1 rounded-lg">
+    <GiLightBulb className="text-sm" />
+    Power Supply: {electricity}%
+  </p>
+
+  {/* Water Supply */}
+  <p className="text-[10px] sm:text-xs flex items-center gap-1 font-medium text-blue-500 bg-blue-100 px-2 py-1 rounded-lg">
+    Water Supply: {waterSuply ? <PiShowerBold className="text-sm" /> : <FcCancel className="text-sm" />}
+  </p>
+</div>
+
         
      
         
