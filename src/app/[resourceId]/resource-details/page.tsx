@@ -6,7 +6,7 @@ import { FaStar, FaWhatsapp, FaTimes, FaArrowLeft, FaArrowRight } from "react-ic
 import { motion, AnimatePresence } from "framer-motion";
 import { useParams } from "next/navigation";
 import Footer from "@/components/footer";
-import HouseMainComponent from "@/components/HouseMainComponent";
+// import HouseMainComponent from "@/components/HouseMainComponent";
 import HeaderCustom from "@/components/HeaderCostum";
 	
 
