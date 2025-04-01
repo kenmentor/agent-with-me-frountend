@@ -10,7 +10,6 @@ interface ResourceType {
   header: string;
   views: number;
   description: string;
-  rating: number;
   id: string;
   thumbnail: string;
   landmark: string;
@@ -43,7 +42,6 @@ console.log(keyword)
   useEffect(() => {
     const fetchData = async () => {
       try {
-       
         setLoading(true);
         setError(false);
         const res = await fetch(
@@ -90,7 +88,6 @@ console.log(keyword)
                 thumbnail={"/de/d"}
                 id={"rr"}
                 header={"two bed room flat for sale"}
-                rating={9}
                 gallery={[]}
                 landmark={"esuk otu"}
                 price={ 250000}
@@ -104,7 +101,6 @@ console.log(keyword)
                   thumbnail={resource.thumbnail||"/de/d"}
                   id={resource._id}
                   header={resource.header}
-                  rating={resource.rating}
                   gallery={resource.gallery}
                   landmark={resource.landmark}
                   price={resource.price || 200000}

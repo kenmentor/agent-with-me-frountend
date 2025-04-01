@@ -16,7 +16,6 @@ type ResourceProps = {
   price: number;
   id: string;
   landmark: string;
-  rating?: number; // Optional rating
   category?: string; // Markup placeholder for category
   isNew?: boolean; // Markup placeholder for new badge
   gallery: { src: string; alt: string }[];
