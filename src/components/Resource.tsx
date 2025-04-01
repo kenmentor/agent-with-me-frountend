@@ -73,7 +73,7 @@ const Resource = ({
         <p className="text-sm text-gray-500 flex items-center gap-1">
           <FaMapMarkerAlt className="text-red-500" /> {landmark}
         </p>
-        <div className="inline-flex gap-3">
+        <div className="inline-flex gap-3 sm:text-xs">
         <p className="text-xs font-medium text-indigo-500 bg-indigo-100 inline-block px-2 py-1 rounded-lg">
           {category} {/* 🔥 Markup placeholder (Replace later) */}
         </p>
