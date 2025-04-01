@@ -43,7 +43,7 @@ console.log(keyword)
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log("hello")
+       
         setLoading(true);
         setError(false);
         const res = await fetch(
