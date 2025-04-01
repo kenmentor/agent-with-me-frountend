@@ -16,8 +16,8 @@ type ResourceProps = {
   price: number;
   id: string;
   landmark: string;
-  category?: string; // Markup placeholder for category
-  isNew?: boolean; // Markup placeholder for new badge
+  category?: string; 
+  isNew?: boolean; 
   gallery: { src: string; alt: string }[];
   electricity:number;
   waterSuply:boolean;

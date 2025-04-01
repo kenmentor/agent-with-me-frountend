@@ -52,7 +52,7 @@ console.log(keyword)
         
         const result = await res.json();
         setData((prev:ResourceType[])=>{
-          if(bardge<=1){ return result.data}
+          if(bardge<=1){ return result.data||[]}
           else{ return [...prev,result.data]}
 
          

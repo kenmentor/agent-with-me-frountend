@@ -6,7 +6,7 @@ import { FaStar, FaWhatsapp, FaTimes, FaArrowLeft, FaArrowRight } from "react-ic
 import { motion, AnimatePresence } from "framer-motion";
 import { useParams } from "next/navigation";
 import Footer from "@/components/footer";
-// import HouseMainComponent from "@/components/HouseMainComponent";
+import HouseMainComponent from "@/components/HouseMainComponent";
 import HeaderCustom from "@/components/HeaderCostum";
 	
 
@@ -203,7 +203,7 @@ if (data.category=="Minimal"){
       </AnimatePresence>
     </div>
   
-    {/* <HouseMainComponent keyword={{searchWord:"",category:data.category,min:`${data.price-10000}`,max:"",type:data.type,location:"",limit:6}} bardge={1} /> */}
+    <HouseMainComponent keyword={{searchWord:"",category:data.category,min:`${data.price-10000}`,max:"",type:data.type,location:"",limit:6}} bardge={1} />
     <Footer/>
     </>
   );
