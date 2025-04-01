@@ -15,12 +15,12 @@ const Feedback = () => {
 
   return (
     <>
-      <div className={`p-3 duration-100 ${opened && "bg-gray-100 rounded border text-gray-900 m-8"}`}>
+      <div className={`p-3 duration-100 ${opened && "bg-gray-100 rounded border text-gray-900 m-8"} sm:m-1 sm:p-1`}>
 
         {/* Toggle Button to open/close feedback */}
         <div className="w-full flex items-center py-5">
           <button
-            className="text-gray-200 flex items-center rounded-full gap-4 p-2 text-lg"
+            className="text-gray-200 flex items-center rounded-full gap-2 p-2 text-lg sm:text-xs"
             onClick={() => setOpened(prev => !prev)}
           >
             What Was Your experience 
