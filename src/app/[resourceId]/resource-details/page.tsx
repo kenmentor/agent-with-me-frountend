@@ -140,7 +140,7 @@ if (data.category=="Minimal"){
 
       {/* Image Gallery - Slider */}
       <div className="flex mt-4 gap-2 overflow-x-auto hide-scrollbar">
-        {data.gallery.map((image, index) => (
+        {data.gallery||[].map((image, index) => (
           <div key={index} className={`relative w-24 h-24 rounded overflow-hidden cursor-pointer 
                   ${selectedImage === image ? "border-4 border-blue-500" : ""}`}
                onClick={() => handleImageClick(index)}>
