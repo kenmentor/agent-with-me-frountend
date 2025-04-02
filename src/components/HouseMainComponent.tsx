@@ -83,17 +83,7 @@ console.log(keyword)
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
           >
-            <Resource
-                key={"jru"}
-                thumbnail={"/de/d"}
-                id={"rr"}
-                header={"two bed room flat for sale"}
-                gallery={[]}
-                landmark={"esuk otu"}
-                price={ 250000}
-                electricity={89}
-                waterSuply={false}
-             />
+           
             {data.length > 0 ? (
               data.map((resource) => (
                 <Resource
