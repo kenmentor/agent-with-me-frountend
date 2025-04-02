@@ -84,7 +84,7 @@ const RentalPage: React.FC = () => {
       const result = await res.json();
       setSelectedImage(result.thumbnail)
       await setdata(result.data)
-      
+    
       
     }
    catch{ 
