@@ -10,17 +10,17 @@ import HouseMainComponent from "@/components/HouseMainComponent";
 // Define resource type
 
 interface keyword { 
-  searchWord: string;
+
    category: string;
    min:string;
    max:string;
    type:string ;
-   location:string
+   location:string;
    limit:number;
   }
 const Page: React.FC = () => {
   const [keyword, setKeyword] = useState<keyword>(
-    { searchWord: "",min:"", max:"",type:"",category:"",location:"" ,limit:50}
+    { min:"", max:"",type:"",category:"",location:"" ,limit:50}
   );
  const [bardge,setBardge]  = useState(0)
 

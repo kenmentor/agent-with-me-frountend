@@ -3,7 +3,6 @@ import { FaSearch } from "react-icons/fa";
 
 // Define types for props
 interface keyword { 
-  searchWord: string;
    category: string;
    min:string;
    max:string;
@@ -11,6 +10,7 @@ interface keyword {
    location:string
    limit:number;
   }
+
 type SearchBarProps = {
   setKeyword: React.Dispatch<
     React.SetStateAction<keyword>
@@ -22,7 +22,7 @@ const SearchBar = ({ setKeyword }: SearchBarProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setKeyword((prev) => ({
       ...prev,
-      searchWord: e.target.value,
+      location: e.target.value,
     }));
   };
 
@@ -32,7 +32,7 @@ const SearchBar = ({ setKeyword }: SearchBarProps) => {
       <div className="relative flex-1">
         <input
           type="text"
-          placeholder="Search for resources..."
+          placeholder="Search with location..."
           className="w-full h-12 pl-12 pr-4 rounded bg-gray-100 text-gray-700 placeholder-gray-500 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
           onChange={handleChange}
         />

@@ -1,7 +1,6 @@
 import React, { SetStateAction } from 'react'
 
 interface keyword { 
-    searchWord: string;
      category: string;
      min:string;
      max:string;

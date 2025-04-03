@@ -20,7 +20,6 @@ interface ResourceType {
   _id:string;
 }
 interface keyword { 
-  searchWord: string;
    category: string;
    min:string;
    max:string;
@@ -45,9 +44,9 @@ console.log(keyword)
         setLoading(true);
         setError(false);
         const res = await fetch(
-          `https://agent-with-me-backend.onrender.com/v1/resources?keyword=${encodeURIComponent(
-            keyword.searchWord
-          )}&category=${keyword.category}&type=${keyword.type}&location=${keyword.location}&min=${keyword.min}&max=${keyword.max}&bardge=${bardge}&limit=${keyword.limit}`
+          `https://agent-with-me-backend.onrender.com/v1/resources?location=${encodeURIComponent(
+            keyword.location
+          )}&category=${keyword.category}&type=${keyword.type}&min=${keyword.min}&max=${keyword.max}&bardge=${bardge}&limit=${keyword.limit}`
         );
         
         const result = await res.json();

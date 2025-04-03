@@ -8,7 +8,6 @@ import { MdArrowDropDown } from "react-icons/md";
 import Price from "./price";
 
 interface keyword { 
-  searchWord: string;
    category: string;
    min:string;
    max:string;
@@ -25,12 +24,7 @@ type SearchboxProps = {
 };
 
 const categories = [
-  {
-    name:"location",
-    data:[
-    "location"
-  ],
-},
+
 
 {
   name:"type",
