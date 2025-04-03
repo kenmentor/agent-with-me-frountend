@@ -10,7 +10,6 @@
     type : string;
     address: string,
     state:string,
-    landmark:string,
     waterSuply:boolean ,
     electricity:number,
   

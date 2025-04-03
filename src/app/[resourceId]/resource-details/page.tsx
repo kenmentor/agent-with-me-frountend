@@ -24,10 +24,10 @@ interface data {
     price:number;
     address: string ;
     state:string;
-    landmark:string;
     type:string;
     waterSuply:boolean ;
     electricity:number;
+    location:string;
 }
 
 const RentalPage: React.FC = () => {
@@ -49,7 +49,7 @@ const RentalPage: React.FC = () => {
     price:4933,
     address: "saga ",
     state:"lagos",
-    landmark:"tou ctoyyr",
+    location:"ab",
     type:"selfcon",
     waterSuply:true ,
     electricity:50,
@@ -128,7 +128,7 @@ if (data.category=="Minimal"){
         </div>
       </div>
       
-      <p className="text-gray-600 mt-1">📍 {data.landmark}, {data.state}, Nigeria</p>
+      <p className="text-gray-600 mt-1">📍 {data.location}, {data.state}, Nigeria</p>
      
 
       {/* Main Image */}
@@ -203,7 +203,7 @@ if (data.category=="Minimal"){
       </AnimatePresence>
     </div>
   
-    <HouseMainComponent keyword={{searchWord:"",category:data.category,min:`${data.price-10000}`,max:"",type:data.type,location:"",limit:6}} bardge={1} />
+    <HouseMainComponent keyword={{category:data.category,min:`${data.price-10000}`,max:"",type:data.type,location:data.location,limit:6}} bardge={1} />
     <Footer/>
     </>
   );

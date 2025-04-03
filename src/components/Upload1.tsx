@@ -24,7 +24,6 @@ interface formData {
   type: string;
   address: string;
   state: string;
-  landmark: string;
   waterSuply: boolean;
   electricity: number;
 }
@@ -44,7 +43,6 @@ const UploadWizard = () => {
     type: "djdj",
     address: "djndj",
     state: "Calabar",
-    landmark: "jdjdj",
     waterSuply: true,
     electricity: 90,
   });
@@ -68,7 +66,6 @@ const UploadWizard = () => {
       data.append("type", formData.type);
       data.append("address", formData.address);
       data.append("state", formData.state);
-      data.append("landmark", formData.landmark);
       data.append("waterSuply", JSON.stringify(formData.waterSuply));
       data.append("electricity", JSON.stringify(formData.electricity));
       formData.files.forEach((file) => {

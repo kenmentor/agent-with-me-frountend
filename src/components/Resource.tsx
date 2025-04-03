@@ -15,7 +15,7 @@ type ResourceProps = {
   thumbnail: string;
   price: number;
   id: string;
-  landmark: string;
+  location: string;
   category?: string; 
   isNew?: boolean; 
   gallery: { src: string; alt: string }[];
@@ -28,7 +28,7 @@ const Resource = ({
   thumbnail,
   price,
   id,
-  landmark,
+  location,
   category = "Luxury",
   isNew = false,
   electricity ,
@@ -71,7 +71,7 @@ const Resource = ({
 
         {/* Landmark & Category */}
         <p className="text-sm text-gray-500 flex items-center gap-1">
-          <FaMapMarkerAlt className="text-red-500" /> {landmark}
+          <FaMapMarkerAlt className="text-red-500" /> {location}
         </p>
         <div className="flex flex-wrap gap-2 sm:gap-3 items-center">
   {/* Category */}
