@@ -78,19 +78,19 @@ const RentalPage: React.FC = () => {
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, "_blank");
   };
-  async function getdata (){
-    try{
-      const res = await fetch(`https://agent-with-me-backend.onrender.com/v1/details/${resourceId}`)
+  const getdata = async () => {
+    try {
+      const res = await fetch(`https://agent-with-me-backend.onrender.com/v1/details/${resourceId}`);
       const result = await res.json();
-      setSelectedImage(result.thumbnail)
-      await setdata(result.data)
-    
-      
+      if (result && result.data) {
+        setdata(result.data);
+        setSelectedImage(result.data.thumbnail);
+      }
+    } catch (error) {
+      console.error("Fetch error:", error);
     }
-   catch{ 
-    console.log("error")
-   }
-  }
+  };
+  
 useEffect(()=>{
   getdata()
 },[])
