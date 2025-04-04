@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+
 interface formData {
   images: File[];
   thumbnail: File | null;
