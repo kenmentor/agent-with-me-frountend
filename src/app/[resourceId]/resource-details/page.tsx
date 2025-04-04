@@ -78,18 +78,22 @@ const RentalPage: React.FC = () => {
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, "_blank");
   };
-  const getdata = async () => {
+  async function getdata() {
     try {
       const res = await fetch(`https://agent-with-me-backend.onrender.com/v1/details/${resourceId}`);
       const result = await res.json();
+  
       if (result && result.data) {
         setdata(result.data);
-        setSelectedImage(result.data.thumbnail);
+        const thumbnail = result.data.thumbnail || (result.data.gallery && result.data.gallery[0]) || "";
+        setSelectedImage(thumbnail);
+      } else {
+        console.error("Invalid data structure:", result);
       }
-    } catch (error) {
-      console.error("Fetch error:", error);
+    } catch (err) {
+      console.log("Fetch error:", err);
     }
-  };
+  }
   
 useEffect(()=>{
   getdata()
