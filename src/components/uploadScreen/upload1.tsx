@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React, { useState } from "react";
-
+// import validator from "@/app/utility/";
 interface formData {
   images: File[];
   thumbnail: File | null;
@@ -26,7 +26,7 @@ interface StepOneProps {
 
 const StepOne: React.FC<StepOneProps> = ({ formData, setFormData, goToNextStep }) => {
   const [error, setError] = useState<string | null>(null);
-
+  // const [validatorRes,setValidatorRes] = useState({state:true,message:""})
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files) return;
 
@@ -47,21 +47,30 @@ const StepOne: React.FC<StepOneProps> = ({ formData, setFormData, goToNextStep }
       <h2 className="text-2xl font-semibold text-gray-100 mb-6">Step 1: Upload Files</h2>
       
       <div className="space-y-4">
+      
         <input
+        id="title"
           type="text"
           placeholder="Enter title"
           value={formData.title}
           onChange={(e) => setFormData((prev: formData) => ({ ...prev, title: e.target.value }))}
           className="w-full p-3 bg-gray-800 text-white rounded-md focus:outline-none focus:ring focus:ring-blue-500"
         />
+        price
          <input
+         id="price"
           type="number"
           placeholder="price eg 20000"
           value={formData.price}
           onChange={(e) => setFormData((prev: formData) => ({ ...prev, price: e.target.value }))}
           className="w-full p-3 bg-gray-800 text-white rounded-md focus:outline-none focus:ring focus:ring-blue-500"
         />
+       <p className="text-gray-400">
+
+       </p>
+     
          <input
+             id="location"
           type="text"
           placeholder="location "
           value={formData.address}
@@ -69,6 +78,7 @@ const StepOne: React.FC<StepOneProps> = ({ formData, setFormData, goToNextStep }
           className="w-full p-3 bg-gray-800 text-white rounded-md focus:outline-none focus:ring focus:ring-blue-400"
         />
          <input
+             id="address"
           type="text"
           placeholder="address E.g plot 4 harmony estate "
           value={formData.address}
@@ -78,6 +88,7 @@ const StepOne: React.FC<StepOneProps> = ({ formData, setFormData, goToNextStep }
         
         
         <textarea
+            id="description"
           placeholder="Enter description"
           value={formData.description}
           onChange={(e) => setFormData((prev: formData) => ({ ...prev, description: e.target.value }))}
@@ -85,7 +96,22 @@ const StepOne: React.FC<StepOneProps> = ({ formData, setFormData, goToNextStep }
         />
         
           
-      
+        <label className="text-gray-400" htmlFor="#price">
+        price
+       </label>
+       <label className="text-gray-400"  htmlFor="#title">
+        title
+        </label>
+        <label className="text-gray-400"  htmlFor="#description">
+        description
+        </label>
+        <label className="text-gray-400"  htmlFor="#address">
+        address
+        </label>
+        <label className="text-gray-400"  htmlFor="#location">
+        location
+        </label>
+
      
       </div>
       
@@ -111,7 +137,10 @@ const StepOne: React.FC<StepOneProps> = ({ formData, setFormData, goToNextStep }
       <div className="flex justify-end mt-6">
         <button
           type="button"
-          onClick={goToNextStep}
+          onClick={
+          goToNextStep
+            
+          }
           className="px-6 py-2 bg-blue-600 text-gray-100 rounded hover:bg-blue-700 transition"
         >
           Next

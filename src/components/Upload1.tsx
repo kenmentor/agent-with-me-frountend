@@ -32,16 +32,16 @@ const UploadWizard = () => {
   const [step, setStep] = useState<number>(1);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState<formData>({
-    title: "heh",
-    description: "jdjjd",
+    title: "",
+    description: "",
     files: [],
-    category: "dhhdh",
+    category: "",
     thumbnail: null,
-    price: "808646",
-    location: "egeg",
+    price: "",
+    location: "",
     images: [],
-    type: "djdj",
-    address: "djndj",
+    type: "",
+    address: "",
     state: "Calabar",
     waterSuply: true,
     electricity: 90,
@@ -52,8 +52,8 @@ const UploadWizard = () => {
   const goToPreviousStep = () => setStep((prev) => prev - 1);
 
   const handleSubmit = async () => {
-    console.log("started process data");
-    try {
+    setLoading(true)
+    try {    
       const data = new FormData();
       if (formData.thumbnail) {
         data.append("thumbnail", formData.thumbnail);
@@ -83,9 +83,7 @@ const UploadWizard = () => {
       setMessage("error");
     } finally {
       setLoading(false);
-      setMessage("offline");
-      console.log("sent");
-      console.log(message);
+      
     }
   };
 

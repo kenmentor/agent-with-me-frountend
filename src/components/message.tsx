@@ -1,13 +1,14 @@
+
 import Link from 'next/link'
 import React, { useState } from 'react'
-interface ErroMessage{
+interface ErroMessage_ty{
   setMessage:React.Dispatch<React.SetStateAction<string>>
 }
 // interface SuccessMessage{
 //   setMessage:React.Dispatch<React.SetStateAction<boolean>>
 // }
 
-const ErroMessage:React.FC<ErroMessage> = ({setMessage}) => {
+const ErroMessage:React.FC<ErroMessage_ty> = ({setMessage}) => {
   const [clicked,setClicked] = useState(false)
   function click(){
     setMessage("")
@@ -41,5 +42,15 @@ const SuccessMessage = () => {
     </div>
     )
   }
-
-export {ErroMessage,SuccessMessage}
+  interface validator {
+    message:string 
+  }
+  const Validation:React.FC<validator>   = ({message})=> {
+   
+      return (
+          <div className='text-white p-2 absolute top-1 left-0 right-0 bg-red-500'> 
+            <h1 className='text-3xl'> {message}</h1>
+          </div>
+      )
+    }
+export {ErroMessage,SuccessMessage,Validation}

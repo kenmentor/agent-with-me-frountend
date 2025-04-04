@@ -52,7 +52,7 @@ const Upload3Two: React.FC<Upload3Two> = ({
           <div className={`p-3 border rounded cursor-pointer text-center transition "border-blue-500 bg-gray-800`}>
             <h2 className=" text-white text-nowrap font-semibold ">
 
-           what is the level of power supply
+           What is the level of power supply
             </h2>
             {formData.electricity}
             <input type="range" min="0" max="100" value={formData.electricity} 
