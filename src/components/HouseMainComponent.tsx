@@ -45,9 +45,9 @@ console.log(keyword)
         setLoading(true);
         setError(false);
         const res = await fetch(
-          `https://agent-with-me-backend.onrender.com/v1/resources?location=${encodeURIComponent(
-            keyword.location
-          )}&category=${keyword.category}&type=${keyword.type}&min=${keyword.min}&max=${keyword.max}&bardge=${bardge}&limit=${keyword.limit}`
+          `https://agent-with-me-backend.onrender.com/v1/resources?location=` //${encodeURIComponent(
+          //   keyword.location
+          // )}&category=${keyword.category}&type=${keyword.type}&min=${keyword.min}&max=${keyword.max}&bardge=${bardge}&limit=${keyword.limit}`
         );
         
         const result = await res.json();
