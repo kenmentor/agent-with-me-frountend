@@ -22,7 +22,7 @@ const Page: React.FC = () => {
   const [keyword, setKeyword] = useState<keyword>(
     { min:"", max:"",type:"",category:"",location:"" ,limit:50}
   );
- const [bardge,setBardge]  = useState(0)
+ const [bardge,setBardge]  = useState(1)
 
   return (
     <>
@@ -56,7 +56,7 @@ const Page: React.FC = () => {
         <div className="max-w-4xl mx-auto">
           <SearchBar setKeyword={setKeyword} />
       
-          <div className="mt-4" onScroll={()=>setBardge(0)}>
+          <div className="mt-4" onScroll={()=>setBardge(1)}>
             <Searchbox setKeyword={setKeyword} min={keyword.min} max={keyword.max} />
           </div>
         </div >

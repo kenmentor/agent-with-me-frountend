@@ -1,4 +1,4 @@
-import validator from "./validator"
-export default {
-validator:validator
-}
+// // import validator from "./validator"
+// export default {
+// validator:validator
+// }
