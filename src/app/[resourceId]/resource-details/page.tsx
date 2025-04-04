@@ -112,33 +112,37 @@ if (data.category=="Mediate"){
 if (data.category=="Minimal"){
   categoryStyle = "text-green-500"
 }
-
+const brokenImage = "brokenImage"
 
   return (
     <>
     
-  <HeaderCustom text={data.title} showBackButton={true}/>
+  <HeaderCustom text={data.title||"Title"} showBackButton={true}/>
     <div className="max-w-6xl mx-auto p-6 bg-white shadow-lg rounded mt-13">
       {/* Header & Rating */}
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold text-gray-900">{data.title}</h1>
+        <h1 className="text-3xl font-bold text-gray-900">{data.title||"Title"}</h1>
         <div className="flex items-center gap-1">
           <FaStar className="text-yellow-500" />
-          <span className="text-gray-700 font-semibold">4.8 ({data.views} reviews)</span>
+          <span className="text-gray-700 font-semibold">4.8 ({data.views||"0"} reviews)</span>
         </div>
       </div>
       
-      <p className="text-gray-600 mt-1">📍 {data.location}, {data.state}, Nigeria</p>
+      <p className="text-gray-600 mt-1">📍 {data.location||"location"}, {data.state||"Cross river"}, Nigeria</p>
      
 
       {/* Main Image */}
       <div className="relative w-full h-80 mt-4 rounded overflow-hidden cursor-pointer"
            onClick={() => setModalOpen(true)}>
-        <Image src={selectedImage} alt={data.title} layout="fill" objectFit="cover"
+        <Image src={selectedImage} alt={data.title||"Title"} layout="fill" objectFit="cover"
                className="rounded transition duration-300 hover:opacity-80" />
       </div>
 
       {/* Image Gallery - Slider */}
+      {
+    data&&(
+
+      
       <div className="flex mt-4 gap-2 overflow-x-auto hide-scrollbar">
         {data.gallery||[].map((image, index) => (
           <div key={index} className={`relative w-24 h-24 rounded overflow-hidden cursor-pointer 
@@ -149,11 +153,12 @@ if (data.category=="Minimal"){
           </div>
         ))}
       </div>
-
+      )
+    }
       {/* Pricing & Booking */}
       <div className="mt-6 p-4 bg-gray-100 rounded">
         <p className="text-lg font-semibold  text-gray-800">
-        ₦{data.price.toLocaleString()} <span className="text-sm text-gray-300">/ per year</span>
+        ₦{data.price.toLocaleString()||"0.000"} <span className="text-sm text-gray-300">/ per year</span>
         </p>
         <p className="text-gray-600">{data.type} • 2 {(data.waterSuply)? "with water":"without water "} •  <div className="inline  bg-gray-200 rounded-xl px-2  py-1  text-center " >
       <p className={`${categoryStyle} inline`}>{data.category}</p>
@@ -183,7 +188,7 @@ if (data.category=="Minimal"){
 
               {/* Large Image */}
               <div className="relative w-full h-[500px] flex justify-center items-center">
-                <motion.img src={selectedImage} alt={data.title} className="max-h-[90vh] w-auto rounded-lg"
+                <motion.img src={selectedImage} alt={data.title||brokenImage} className="max-h-[90vh] w-auto rounded-lg"
                             initial={{ scale: 0.8 }} animate={{ scale: 1 }} exit={{ scale: 0.8 }} />
               </div>
 
@@ -202,8 +207,10 @@ if (data.category=="Minimal"){
         )}
       </AnimatePresence>
     </div>
-  
-    <HouseMainComponent keyword={{category:data.category,min:`${data.price-10000}`,max:"",type:data.type,location:data.location,limit:6}} bardge={1} />
+  <div className="bg-white ">
+  <HouseMainComponent keyword={{category:data.category,min:`${data.price-10000}`,max:"",type:data.type,location:data.location,limit:6,id:data._id}} bardge={1} />
+  </div>
+    
     <Footer/>
     </>
   );

@@ -1,16 +1,32 @@
 import React, { useState } from 'react'
 import { FaFaceFrown, FaFaceSadCry, FaFaceSmile, FaFaceSmileWink } from 'react-icons/fa6'
-
+interface data{
+  message:string;
+  ok:boolean
+}
 const Feedback = () => {
-  const [data, setData] = useState("");
+  const [response, setresponse] = useState<data>();
   const [opened, setOpened] = useState(false);
+  const [loading,setLoading] = useState(false)
+  const [message,setMessage] = useState("")
+  const [ data,setData] = useState("") 
 
   // Handle submit feedback
-  function submitFeedback() {
-    fetch("https://agent-with-me-backend.onrender.com/", {
+  async function submitFeedback() {
+    try{
+      setLoading(true)    
+    fetch("https://agent-with-me-backend.onrender.com/v1/feedback", {
       method: "POST",
-      body: data
-    });
+      body:JSON.stringify( {feedback:data})
+    }).then((data)=>data.json())
+    .then ((data)=>setData(data))
+  }
+  catch{
+    
+  }
+  finally{
+    setLoading(false)
+  }
   }
 
   return (
@@ -21,7 +37,9 @@ const Feedback = () => {
         <div className="w-full flex items-center py-5">
           <button
             className="text-gray-200 flex items-center rounded-full gap-2 p-2 text-lg sm:text-xs"
-            onClick={() => setOpened(prev => !prev)}
+            onClick={() => ()=>{setOpened(prev => !prev)
+              setMessage("")
+            }}
           >
             What Was Your experience 
             <div className="flex gap-2">
@@ -34,9 +52,11 @@ const Feedback = () => {
         </div>
 
         {/* Feedback Section */}
-        {opened && (
+        {opened&&!response?.message?(
+          
           <div className="flex gap-2 flex-col">
-            <textarea
+            
+              <textarea
               className="bg-gray-200 p-2 rounded resize-none w-full sm:w-72 md:w-80"
               value={data}
               onChange={(e) => setData(e.target.value)}
@@ -47,9 +67,16 @@ const Feedback = () => {
                 className="py-1 px-4 bg-blue-600 text-white rounded hover:bg-blue-700 transition-all duration-200"
                 onClick={submitFeedback}
               >
-                Send
+                {loading?"Send":"loading..."}
               </button>
+              
             </div>
+           {response?.message}
+          </div>
+        
+        ):(
+          <div className={response?.ok?'text-green-500':'text-red-500'}>
+            {message}
           </div>
         )}
 

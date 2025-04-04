@@ -12,7 +12,7 @@ interface ResourceType {
   description: string;
   id: string;
   thumbnail: string;
-  landmark: string;
+  location: string;
   gallery: { src: string; alt: string }[];
   price: number;
   electricity:number;
@@ -26,6 +26,7 @@ interface keyword {
    type:string ;
    location:string;
    limit:number;
+   id:string
   }
 
  interface HouseMainComponent {
@@ -91,7 +92,7 @@ console.log(keyword)
                   id={resource._id}
                   header={resource.header}
                   gallery={resource.gallery}
-                  landmark={resource.landmark}
+                  location={resource.location}
                   price={resource.price || 200000}
                   electricity={resource.electricity}
                   waterSuply={resource.waterSuply}
