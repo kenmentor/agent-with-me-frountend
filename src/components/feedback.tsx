@@ -19,7 +19,7 @@ const Feedback = () => {
       method: "POST",
       body:JSON.stringify( {feedback:data})
     }).then((data)=>data.json())
-    .then ((data)=>setData(data))
+    .then ((data)=>setresponse(data))
   }
   catch{
     

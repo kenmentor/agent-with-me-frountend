@@ -26,7 +26,7 @@ interface keyword {
    type:string ;
    location:string;
    limit:number;
-   id:string
+   id?:string
   }
 
  interface HouseMainComponent {
