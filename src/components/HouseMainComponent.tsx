@@ -58,7 +58,7 @@ console.log(keyword)
 
          
         });
-        console.log(result)
+        console.log("data from ",result)
       } catch (error) {
 
         console.error("Error fetching data:", error);
