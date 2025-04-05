@@ -11,9 +11,9 @@ const Footer = () => {
       <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* Left Section - Branding */}
         <div>
-          <h2 className="text-2xl font-semibold text-gray-900">YourBrand</h2>
+          <h2 className="text-2xl font-semibold text-gray-900">Agent-with-me</h2>
           <p className="mt-2 text-sm text-gray-600">
-            Unlock limitless knowledge with free resources tailored for you.
+            Get the Perfect appartment without stress
           </p>
         </div>
 
@@ -23,7 +23,7 @@ const Footer = () => {
           <ul className="mt-3 space-y-2">
             <li><Link href="/" className="hover: text-blue-600 transition-colors">Home</Link></li>
             <li><Link href="/about" className="hover: text-blue-600 transition-colors">About</Link></li>
-            <li><Link href="/resources" className="hover: text-blue-600 transition-colors">Resources</Link></li>
+            <li><Link href="/homepage" className="hover: text-blue-600 transition-colors">Resources</Link></li>
             <li><Link href="/contact" className="hover: text-blue-600 transition-colors">Contact</Link></li>
           </ul>
         </div>
@@ -53,7 +53,7 @@ const Footer = () => {
 
       {/* Bottom Section */}
       <div className="text-center text-sm text-gray-500 mt-8 border-t pt-4">
-        &copy; {new Date().getFullYear()} YourBrand. All rights reserved.
+        &copy; {new Date().getFullYear()} Agent-with-me. All rights reserved.
       </div>
     </footer>
     </>

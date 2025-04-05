@@ -40,17 +40,9 @@ const Page: React.FC = () => {
         Find Your Perfect Home
       </h1>
       <p className="text-gray-200 text-sm sm:text-base md:text-lg mt-2">
-        Browse thousands of listings to find your ideal apartment
+        Browse thousands of availabe houses and find your ideal apartment.
       </p>
     </motion.header>
-
-
-
-
-
-
-
-
       {/* Search Section */}
       <section className="px-6 py-6 bg-white shadow-sm">
         <div className="max-w-4xl mx-auto">

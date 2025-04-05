@@ -162,7 +162,7 @@ const brokenImage = "brokenImage"
       {/* Pricing & Booking */}
       <div className="mt-6 p-4 bg-gray-100 rounded">
         <p className="text-lg font-semibold  text-gray-800">
-        ₦{data.price.toLocaleString()||"0.000"} <span className="text-sm text-gray-300">/ per year</span>
+        ₦{data.price?.toLocaleString()||"0.000"} <span className="text-sm text-gray-300">/ per year</span>
         </p>
         <p className="text-gray-600">{data.type} • 2 {(data.waterSuply)? "with water":"without water "} •  <div className="inline  bg-gray-200 rounded-xl px-2  py-1  text-center " >
       <p className={`${categoryStyle} inline`}>{data.category}</p>
