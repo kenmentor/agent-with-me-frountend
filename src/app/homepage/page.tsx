@@ -2,7 +2,7 @@
 
 
 import SearchBar from "@/components/SearchBar";
-import React, {  useState } from "react";
+import React, {  useState,Suspense } from "react";
 import Searchbox from "@/components/searchbox";
 import { motion } from "framer-motion";
 import Footer from "@/components/footer";
@@ -53,8 +53,9 @@ const Page: React.FC = () => {
           </div>
         </div >
       </section>
-
+      <Suspense>
       <HouseMainComponent keyword={keyword} bardge={bardge}/>
+      </Suspense>
      
     </div >
     <Footer/>
