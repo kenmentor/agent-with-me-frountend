@@ -43,29 +43,28 @@ const HouseMainComponent: React.FC<HouseMainComponent> = ({ keyword, bardge = 0 
 
   const searchParams = useSearchParams();
 
-  const params = {
-    location: searchParams.get("location") || keyword?.location || "",
-    category: searchParams.get("category") || keyword?.category || "",
-    type: searchParams.get("type") || keyword?.type || "",
-    min: searchParams.get("min") || keyword?.min || "0",
-    max: searchParams.get("max") || keyword?.max || "1000000",
-    limit: searchParams.get("limit") || keyword?.limit?.toString() || "10",
-    bardge: searchParams.get("bardge") || bardge.toString(),
-  };
-
   useEffect(() => {
+    const queryObj: Record<string, string> = {};
+
+    // Only add params if they exist (filter is active)
+    ["location", "category", "type", "min", "max", "limit", "bardge"].forEach((key) => {
+      const val = searchParams.get(key);
+      if (val && val !== "") queryObj[key] = val;
+    });
+
+    const query = new URLSearchParams(queryObj).toString();
+    const finalUrl = `https://agent-with-me-backend.onrender.com/v1/resources${query ? "?" + query : ""}`;
+
     const fetchData = async () => {
       try {
         setLoading(true);
         setError(false);
 
-        const query = new URLSearchParams(params).toString();
-
-        const res = await fetch(`https://agent-with-me-backend.onrender.com/v1/resources?${query}`);
+        const res = await fetch(finalUrl);
         const result = await res.json();
         setData(result);
-      } catch (error) {
-        console.error("Error fetching data:", error);
+      } catch (err) {
+        console.error(err);
         setError(true);
       } finally {
         setLoading(false);
@@ -73,8 +72,8 @@ const HouseMainComponent: React.FC<HouseMainComponent> = ({ keyword, bardge = 0 
     };
 
     fetchData();
-  }, [params.location, params.category, params.type, params.min, params.max, params.limit, params.bardge]);
-
+  }, [searchParams.toString()]);
+  
   return (
     <main className="px-6 py-10">
       {loading ? (
