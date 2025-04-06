@@ -54,7 +54,7 @@ const HouseMainComponent: React.FC<HouseMainComponent> = ({ keyword, bardge = 1 
 
     // const query = new URLSearchParams(queryObj).toString();
     // // ${query ? "?" + query : ""}
-    const finalUrl = `https://agent-with-me-backend.onrender.com/v1/resources?location${keyword?.location}`;
+    const finalUrl = `https://agent-with-me-backend.onrender.com/v1/resources?location=${keyword?.location}`;
 
     const fetchData = async () => {
       try {
