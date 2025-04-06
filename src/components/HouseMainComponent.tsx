@@ -36,7 +36,7 @@ interface HouseMainComponent {
   bardge?: number;
 }
 
-const HouseMainComponent: React.FC<HouseMainComponent> = ({ keyword, bardge = 0 }) => {
+const HouseMainComponent: React.FC<HouseMainComponent> = ({ keyword, bardge = 1 }) => {
   const [data, setData] = useState<ResourceType[]>([]);
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
@@ -54,7 +54,7 @@ const HouseMainComponent: React.FC<HouseMainComponent> = ({ keyword, bardge = 0 
 
     // const query = new URLSearchParams(queryObj).toString();
     // // ${query ? "?" + query : ""}
-    const finalUrl = `https://agent-with-me-backend.onrender.com/v1/resources`;
+    const finalUrl = `https://agent-with-me-backend.onrender.com/v1/resources?location${keyword?.location}`;
 
     const fetchData = async () => {
       try {
@@ -73,7 +73,7 @@ const HouseMainComponent: React.FC<HouseMainComponent> = ({ keyword, bardge = 0 
     };
 
     fetchData();
-  }, [searchParams.toString()]);
+  }, [keyword?.location,bardge]);
   
   return (
     <main className="px-6 py-10">
