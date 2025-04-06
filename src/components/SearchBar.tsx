@@ -1,5 +1,6 @@
 import React from "react";
-import { FaSearch } from "react-icons/fa";
+
+import { MdLocationSearching } from "react-icons/md";
 
 // Define types for props
 interface keyword { 
@@ -37,7 +38,8 @@ const SearchBar = ({ setKeyword }: SearchBarProps) => {
           onChange={handleChange}
         />
         {/* Search Icon Inside Input */}
-        <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500" />
+        
+        <MdLocationSearching className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500" />
       </div>
     </header>
   );
