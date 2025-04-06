@@ -75,7 +75,7 @@ const HouseMainComponent: React.FC<HouseMainComponent> = ({ keyword, bardge = 1 
     };
 
     fetchData();
-  }, [keyword?.location,bardge]);
+  }, [keyword?.location]);
   
   return (
     <main className="px-6 py-10">
