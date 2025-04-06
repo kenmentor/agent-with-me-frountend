@@ -65,7 +65,9 @@ const HouseMainComponent: React.FC<HouseMainComponent> = ({ keyword, bardge = 1 
         const result = await res.json();
         console.log(result)
         console.log(keyword?.location)
+        console.log(bardge)
         setData(result.data);
+
       } catch (err) {
         console.error(err);
         setError(true);
