@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import Loading from "@/components/Loainding";
 import Error from "@/components/Erro";
 import { motion } from "framer-motion";
-import { useSearchParams } from "next/navigation";
+// import { useSearchParams } from "next/navigation";
 
 interface ResourceType {
   header: string;
@@ -41,19 +41,20 @@ const HouseMainComponent: React.FC<HouseMainComponent> = ({ keyword, bardge = 0 
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
 
-  const searchParams = useSearchParams();
+  // const searchParams = useSearchParams();
 
   useEffect(() => {
-    const queryObj: Record<string, string> = {};
+    // const queryObj: Record<string, string> = {};
 
-    // Only add params if they exist (filter is active)
-    ["location", "category", "type", "min", "max", "limit", "bardge"].forEach((key) => {
-      const val = searchParams.get(key);
-      if (val && val !== "") queryObj[key] = val;
-    });
+    // // Only add params if they exist (filter is active)
+    // ["location", "category", "type", "min", "max", "limit", "bardge"].forEach((key) => {
+    //   const val = searchParams.get(key);
+    //   if (val && val !== "") queryObj[key] = val;
+    // });
 
-    const query = new URLSearchParams(queryObj).toString();
-    const finalUrl = `https://agent-with-me-backend.onrender.com/v1/resources${query ? "?" + query : ""}`;
+    // const query = new URLSearchParams(queryObj).toString();
+    // // ${query ? "?" + query : ""}
+    const finalUrl = `https://agent-with-me-backend.onrender.com/v1/resources`;
 
     const fetchData = async () => {
       try {
