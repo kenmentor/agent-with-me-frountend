@@ -37,8 +37,9 @@ const Feedback = () => {
         <div className="w-full flex items-center py-5">
           <button
             className="text-gray-200 flex items-center rounded-full gap-2 p-2 text-lg sm:text-xs"
-            onClick={() => ()=>{setOpened(prev => !prev)
+            onClick={() =>{setOpened(prev => !prev)
               setMessage("")
+
             }}
           >
             What Was Your experience 
