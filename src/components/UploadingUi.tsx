@@ -7,7 +7,7 @@ const UploadingUi = () => {
 // Don't render if not loading
 
   return (
-    <div className="fixed top-0 left-0 bottom-0 bg-black bg-opacity-50 flex items-center justify-center z-50 backdrop-blur">
+    <div className="fixed top-0 left-0 bottom-0 right-0 bg-black bg-opacity-50 flex items-center justify-center z-50 backdrop-blur-sm">
       <div className="bg-white p-6 rounded-lg shadow-lg w-1/3 text-center">
         <h3 className="text-xl font-bold">Uploading...</h3>
         {/* Progress Bar */}
