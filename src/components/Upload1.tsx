@@ -52,12 +52,16 @@ const UploadWizard = () => {
   const goToPreviousStep = () => setStep((prev) => prev - 1);
 
   const handleSubmit = async () => {
-    setLoading(true)
-    try {    
+    setLoading(true);
+    setMessage("");
+  
+    try {
       const data = new FormData();
+  
       if (formData.thumbnail) {
         data.append("thumbnail", formData.thumbnail);
       }
+  
       data.append("title", formData.title);
       data.append("description", formData.description);
       data.append("category", formData.category);
@@ -68,24 +72,34 @@ const UploadWizard = () => {
       data.append("state", formData.state);
       data.append("waterSuply", JSON.stringify(formData.waterSuply));
       data.append("electricity", JSON.stringify(formData.electricity));
+  
       formData.files.forEach((file) => {
         data.append("files", file);
       });
-      setLoading(true);
-      fetch("http://agent-with-me-backend.onrender.com/v1/upload", {
+  
+      const res = await fetch("https://agent-with-me-backend.onrender.com/v1/upload", {
         method: "POST",
         body: data,
-      })
-        .then((res) => res.json())
-        .then((result) => console.log("eeee", result));
-    } catch {
-      console.log("error occurred while posting data");
+      });
+  
+      const result = await res.json();
+  
+      console.log("Server Response:", result);
+  
+      if (!res.ok) {
+        throw new Error(result.message || "Upload failed");
+      }
+  
+      setMessage("success");
+      // Optionally reset formData or redirect here
+    } catch  {
+      
       setMessage("error");
     } finally {
       setLoading(false);
-      
     }
   };
+  
 
   console.log((100 / 6) * step);
 
