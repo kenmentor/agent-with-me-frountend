@@ -78,6 +78,7 @@ const UploadWizard = () => {
     }
 
     try {
+      console.log(formData)
       const data = new FormData();
       if (formData.thumbnail) {
         data.append("thumbnail", formData.thumbnail);

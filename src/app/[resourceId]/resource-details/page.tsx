@@ -58,9 +58,13 @@ const RentalPage: React.FC = () => {
   };
 
   const nextImage = () => {
+    if(currentIndex <= data.gallery.length){
+
+    
     const newIndex = (currentIndex + 1) % data.gallery.length;
     setSelectedImage(data.gallery[newIndex]);
     setCurrentIndex(newIndex);
+  }
   };
 
   const prevImage = () => {
