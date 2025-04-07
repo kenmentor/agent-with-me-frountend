@@ -91,22 +91,19 @@ const UploadWizard = () => {
       }
   
       setMessage("success");
-      // Optionally reset formData or redirect here
     } catch  {
-      
       setMessage("error");
     } finally {
       setLoading(false);
     }
   };
-  
 
   console.log((100 / 6) * step);
 
   return (
     <div className="max-w-full mx-auto h-full p-6">
       {/* Header with Back Arrow and Progress Tracker */}
-      <div className="flex  sm:flex-row justify-between items-center sm:gap-6 text-white mb-6">
+      <div className="flex sm:flex-row justify-between items-center sm:gap-6 text-white mb-6">
         <Link href={"/homepage"}>
           <MdArrowBackIos className="h-8 w-8 text-white" />
         </Link>
@@ -121,8 +118,6 @@ const UploadWizard = () => {
           ></div>
         </div>
       </div>
-
-      {loading && <Loading />}
 
       {/* Message */}
       {message === "error" && <ErroMessage setMessage={setMessage} />}
@@ -170,6 +165,26 @@ const UploadWizard = () => {
           goToPreviousStep={goToPreviousStep}
           handleSubmit={handleSubmit}
         />
+      )}
+
+      {/* Upload Progress and Overlay */}
+      {loading && (
+        <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-1/3">
+            <div className="text-center">
+              <h3 className="text-xl font-bold">Uploading...</h3>
+              <div className="w-full bg-gray-200 h-2 mt-4 rounded-full">
+                <div
+                  className="bg-blue-600 h-2 rounded-full"
+                  style={{
+                    width: `${(100 / 6) * step}%`, // Example, adjust based on your progress logic
+                  }}
+                ></div>
+              </div>
+            </div>
+            <Loading />
+          </div>
+        </div>
       )}
     </div>
   );
