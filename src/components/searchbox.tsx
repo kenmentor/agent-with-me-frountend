@@ -70,7 +70,7 @@ const Searchbox = ({ setKeyword ,min,max}: SearchboxProps) => {
   }
   return (
     <>
-  <nav className="flex w-full overflow-x-auto px-4 py-4 gap-4 bg-gray-100 rounded shadow-md scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-800">
+  <nav className="flex w-hv overflow-x-auto px-4 py-4 gap-4 bg-gray-100 rounded shadow-md scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-800">
       {/* Upload Button */}
       <Link href="/upload">
         <motion.div
@@ -90,7 +90,6 @@ const Searchbox = ({ setKeyword ,min,max}: SearchboxProps) => {
        
          <motion.select
           key={index}
-          whileTap={{ scale: 0.9 }}
             id="" className={`flex-shrink-0 flex items-center justify-center px-4 py-2  text-sm font-medium text-blue-600 border border-blue-600 rounded cursor-pointer transition-all duration-200 w-1/4 ${
             "bg-blue-600 text-white hover:bg-blue-700 hover:text-white"
           }`}

@@ -2,12 +2,13 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { FaStar, FaWhatsapp, FaTimes, FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { FaStar, FaWhatsapp, FaTimes } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import { useParams } from "next/navigation";
 import Footer from "@/components/footer";
 import HouseMainComponent from "@/components/HouseMainComponent";
 import HeaderCustom from "@/components/HeaderCostum";
+import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
 	
 
 
@@ -35,7 +36,7 @@ const RentalPage: React.FC = () => {
   const [selectedImage, setSelectedImage] = useState<string>("");
   const [modalOpen, setModalOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
-
+  const [readMore,setReadMore] = useState(false)
   
   const [data,setdata] = useState<data>({
     _id	:"67a1556ba07c49d55f85b11f",
@@ -74,7 +75,7 @@ const RentalPage: React.FC = () => {
 
   const handleWhatsAppContact = () => {
     const phoneNumber = "2349117264336";
-    const message = `Hello, I'm interested in this property. Can you provide more details?`;
+    const message = `Hello, I'm interested in this property. Can you provide more details?${data.title} house id:${data._id}`;
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, "_blank");
   };
@@ -98,11 +99,7 @@ const RentalPage: React.FC = () => {
 useEffect(()=>{
   getdata()
 },[])
-function click (){
-  alert("working boys")
-  console.log("working boys")
-  setModalOpen(prev=>!prev)
-}
+
 let categoryStyle = "text-blue-500"
 
 
@@ -178,32 +175,42 @@ const brokenImage = "brokenImage"
           Contact via WhatsApp
         </button>
       </div>
+      
+    
+      <div className={`text-gray-800 bg-gray-300 p-1 rounded text-ellipsis ${!readMore&&"h-20"}`}>
+        <h1>Description</h1>
+        <p >
+          {data.description}
+          <span onClick={()=>setReadMore((prev) =>!prev)}className="">{!readMore?"Read more":"Show less"}</span>
+        </p>
+
+      </div>
 
       {/* Modal for Full-Screen Image View */}
       <AnimatePresence>
         {modalOpen && (
-          <motion.div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50"
+          <motion.div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 top-0 bottom-0 left-0 right-0"
                       initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
             <div className="relative max-w-4xl w-full p-4 bg-white rounded-lg shadow-lg">
               {/* Close Button */}
-              <button  className="absolute top-4 right-4  bg-gray-800 text-white p-2 rounded-full hover:bg-red-500"   onClick={click}>
+              <button  className="absolute top-4 right-4  bg-gray-800 text-white p-2 rounded-full hover:bg-red-500"   onClick={()=> setModalOpen(false)}>
               <FaTimes />
     </button>
 
               {/* Large Image */}
-              <div className="relative w-full h-[500px] flex justify-center items-center">
-                <motion.img src={selectedImage} alt={data.title||brokenImage} className="max-h-[90vh] w-auto rounded-lg"
+              <div className="relative w-full h-full flex justify-center items-center ">
+                <motion.img src={selectedImage} alt={data.title||brokenImage} className="max-h-full w-full rounded-lg"
                             initial={{ scale: 0.8 }} animate={{ scale: 1 }} exit={{ scale: 0.8 }} />
               </div>
 
               {/* Navigation Arrows */}
               <button className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-gray-900 text-white p-3 rounded-full hover:bg-gray-700"
                       onClick={prevImage}>
-                <FaArrowLeft size={24} />
+                <MdArrowBackIos size={24} />
               </button>
               <button className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-gray-900 text-white p-3 rounded-full hover:bg-gray-700"
                       onClick={nextImage}>
-                <FaArrowRight size={24} />
+                <MdArrowForwardIos size={24} />
               </button>
               
             </div>
