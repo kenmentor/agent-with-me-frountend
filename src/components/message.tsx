@@ -1,56 +1,67 @@
+"use client";
+import Link from 'next/link';
+import React, { useState } from 'react';
 
-import Link from 'next/link'
-import React, { useState } from 'react'
-interface ErroMessage_ty{
-  setMessage:React.Dispatch<React.SetStateAction<string>>
+interface ErroMessageProps {
+  setMessage: React.Dispatch<React.SetStateAction<string>>;
 }
-// interface SuccessMessage{
-//   setMessage:React.Dispatch<React.SetStateAction<boolean>>
-// }
 
-const ErroMessage:React.FC<ErroMessage_ty> = ({setMessage}) => {
-  const [clicked,setClicked] = useState(false)
-  function click(){
-    setMessage("")
-    setClicked(true)
-  }
+const ModalWrapper: React.FC<{ children: React.ReactNode; bgColor: string }> = ({ children, bgColor }) => (
+  <div className="fixed inset-0 backdrop-blur-sm flex justify-center items-center z-50">
+    <div className={`${bgColor} min-w-[300px] max-w-sm w-full p-6 rounded-md shadow-lg`}>
+      {children}
+    </div>
+  </div>
+);
+
+// ❌ Error Message
+export const ErroMessage: React.FC<ErroMessageProps> = ({ setMessage }) => {
+  const [clicked, setClicked] = useState(false);
+
+  const handleClick = () => {
+    setClicked(true);
+    setTimeout(() => setMessage(""), 500); // Delay to show loading
+  };
+
   return (
-    <div className='top-0 left-0 right-0 bottom-0 fixed backdrop-blur-sm flex justify-center items-center'>
-      <div className='bg-red-400  h-40 p-5 rounded-sm' >
-        
-        
-        <div className='flex flex-col item-center gap-5'> 
-          <h1 className='text-3xl'> Something went wrong </h1>
-            <button className='px-10 text-center' onClick={click}>{!clicked?"OK":"loading..."}</button>
-        </div>
+    <ModalWrapper bgColor="bg-red-500 text-white">
+      <div className="flex flex-col items-center gap-4">
+        <h1 className="text-2xl font-semibold">Something went wrong</h1>
+        <button
+          className="bg-white text-red-600 px-6 py-2 rounded-md font-medium hover:bg-red-100 transition"
+          onClick={handleClick}
+          disabled={clicked}
+        >
+          {clicked ? "Loading..." : "OK"}
+        </button>
       </div>
-    </div>
-  )
-}
-const SuccessMessage = () => {
-  const [clicked,setClicked] = useState(false)
-    return (
-      <div className='top-0 left-0 right-0 bottom-0 fixed backdrop-blur-sm flex justify-center items-center'>
-      <div className='bg-green-400  h-40 p-5 rounded-sm' >
-        
-        
-        <div className='flex flex-col item-center gap-5'> 
-          <h1 className='text-3xl'> Successfully Uploaded</h1>
-           <Link href={"/homepage"}><button className='px-10 text-center w-full'onClick={()=>setClicked(true)}>{!clicked?"OK":"loading..."}</button></Link> 
-        </div>
+    </ModalWrapper>
+  );
+};
+
+// ✅ Success Message
+export const SuccessMessage = () => {
+  const [clicked, setClicked] = useState(false);
+
+  return (
+    <ModalWrapper bgColor="bg-green-500 text-white">
+      <div className="flex flex-col items-center gap-4">
+        <h1 className="text-2xl font-semibold">Successfully Uploaded</h1>
+        <Link href="/homepage">
+          <button
+            className="bg-white text-green-600 px-6 py-2 rounded-md font-medium hover:bg-green-100 transition w-full"
+            onClick={() => setClicked(true)}
+            disabled={clicked}
+          >
+            {clicked ? "Loading..." : "Go to Homepage"}
+          </button>
+        </Link>
       </div>
-    </div>
-    )
-  }
-  interface validator {
-    message:string 
-  }
-  const Validation:React.FC<validator>   = ({message})=> {
-   
-      return (
-          <div className='text-white p-2 absolute top-1 left-0 right-0 bg-red-500'> 
-            <h1 className='text-3xl'> {message}</h1>
-          </div>
-      )
-    }
-export {ErroMessage,SuccessMessage,Validation}
+    </ModalWrapper>
+  );
+};
+
+// ⚠️ Validation Warning
+
+
+
