@@ -56,7 +56,6 @@ const StepOne: React.FC<StepOneProps> = ({ formData, setFormData, goToNextStep }
           onChange={(e) => setFormData((prev: formData) => ({ ...prev, title: e.target.value }))}
           className="w-full p-3 bg-gray-800 text-white rounded-md focus:outline-none focus:ring focus:ring-blue-500"
         />
-        price
          <input
          id="price"
           type="number"
@@ -73,7 +72,7 @@ const StepOne: React.FC<StepOneProps> = ({ formData, setFormData, goToNextStep }
              id="location"
           type="text"
           placeholder="location "
-          value={formData.address}
+          value={formData.location}
           onChange={(e) => setFormData((prev: formData) => ({ ...prev, location: e.target.value }))}
           className="w-full p-3 bg-gray-800 text-white rounded-md focus:outline-none focus:ring focus:ring-blue-400"
         />
@@ -96,19 +95,19 @@ const StepOne: React.FC<StepOneProps> = ({ formData, setFormData, goToNextStep }
         />
         
           
-        <label className="text-gray-400" htmlFor="#price">
+        <label className="text-gray-400" htmlFor="price">
         price
        </label>
-       <label className="text-gray-400"  htmlFor="#title">
+       <label className="text-gray-400"  htmlFor="title">
         title
         </label>
-        <label className="text-gray-400"  htmlFor="#description">
+        <label className="text-gray-400"  htmlFor="description">
         description
         </label>
-        <label className="text-gray-400"  htmlFor="#address">
+        <label className="text-gray-400"  htmlFor="address">
         address
         </label>
-        <label className="text-gray-400"  htmlFor="#location">
+        <label className="text-gray-400"  htmlFor="location">
         location
         </label>
 
