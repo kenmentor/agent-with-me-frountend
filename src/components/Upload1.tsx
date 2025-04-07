@@ -7,10 +7,10 @@ import StepThree from "./uploadScreen/upload3";
 import StepFour from "./uploadScreen/preview";
 import Upload3One from "./uploadScreen/upload3.1";
 import Upload3Two from "./uploadScreen/upload3.2";
-import Loading from "./Loainding";
 import { ErroMessage, SuccessMessage } from "./message";
 import { MdArrowBackIos } from "react-icons/md";
 import Link from "next/link";
+import UploadingUi from "./UploadingUi";
 
 interface formData {
   images: File[];
@@ -47,6 +47,7 @@ const UploadWizard = () => {
     electricity: 90,
   });
   const [message, setMessage] = useState("");
+  const [progress,setProgress]= useState(0)
 
   const goToNextStep = () => setStep((prev) => prev + 1);
   const goToPreviousStep = () => setStep((prev) => prev - 1);
@@ -123,7 +124,7 @@ const UploadWizard = () => {
         </div>
       </div>
 
-      {loading && <Loading />}
+      {loading && <UploadingUi/>}
 
       {/* Message */}
       {message === "error" && <ErroMessage setMessage={setMessage} />}
