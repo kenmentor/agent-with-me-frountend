@@ -62,6 +62,12 @@ export const SuccessMessage = () => {
 };
 
 // ⚠️ Validation Warning
+interface ValidatorProps {
+  message: string;
+}
 
-
-
+export const Validation: React.FC<ValidatorProps> = ({ message }) => (
+  <div className="fixed top-4 left-1/2 transform -translate-x-1/2 px-4 py-2 bg-red-600 text-white rounded-md shadow-md z-50">
+    <p className="text-sm font-medium">{message}</p>
+  </div>
+);

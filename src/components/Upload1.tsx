@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useState } from "react";
 import StepOne from "./uploadScreen/upload1";
 import StepTwo from "./uploadScreen/upload2";
@@ -7,7 +5,7 @@ import StepThree from "./uploadScreen/upload3";
 import StepFour from "./uploadScreen/preview";
 import Upload3One from "./uploadScreen/upload3.1";
 import Upload3Two from "./uploadScreen/upload3.2";
-import { ErroMessage, SuccessMessage } from "./message";
+import { ErroMessage, SuccessMessage, Validation } from "./message";
 import { MdArrowBackIos } from "react-icons/md";
 import Link from "next/link";
 import UploadingUi from "./UploadingUi";
@@ -47,22 +45,42 @@ const UploadWizard = () => {
     electricity: 90,
   });
   const [message, setMessage] = useState("");
- 
 
-  const goToNextStep = () => setStep((prev) => prev + 1);
+  const goToNextStep = () => {
+    // Add validation for step 1
+    if (step === 1 && (!formData.title || !formData.description)) {
+      setMessage("Please fill in the required fields (Title & Description).");
+      return;
+    }
+
+    // Add validation for step 2 (example for image files)
+    if (step === 2 && formData.images.length === 0) {
+      setMessage("Please upload at least one image.");
+      return;
+    }
+
+    // Add additional validation checks for each step as necessary
+    setStep((prev) => prev + 1);
+  };
+
   const goToPreviousStep = () => setStep((prev) => prev - 1);
 
   const handleSubmit = async () => {
     setLoading(true);
     setMessage("");
-  
+
+    // Validation before submit
+    if (!formData.thumbnail || !formData.title || !formData.description) {
+      setMessage("Please fill in all required fields before submitting.");
+      setLoading(false);
+      return;
+    }
+
     try {
       const data = new FormData();
-  
       if (formData.thumbnail) {
         data.append("thumbnail", formData.thumbnail);
       }
-  
       data.append("title", formData.title);
       data.append("description", formData.description);
       data.append("category", formData.category);
@@ -73,42 +91,37 @@ const UploadWizard = () => {
       data.append("state", formData.state);
       data.append("waterSuply", JSON.stringify(formData.waterSuply));
       data.append("electricity", JSON.stringify(formData.electricity));
-  
+
       formData.files.forEach((file) => {
         data.append("files", file);
       });
-  
+
       const res = await fetch("https://agent-with-me-backend.onrender.com/v1/upload", {
         method: "POST",
         body: data,
       });
-  
+
       const result = await res.json();
-  
+
       console.log("Server Response:", result);
-  
+
       if (!res.ok) {
         throw new Error(result.message || "Upload failed");
       }
-  
+
       setMessage("success");
       // Optionally reset formData or redirect here
-    } catch  {
-      
+    } catch {
       setMessage("error");
     } finally {
       setLoading(false);
     }
   };
-  
-  
-
-  console.log((100 / 6) * step);
 
   return (
     <div className="max-w-full mx-auto h-full p-6">
       {/* Header with Back Arrow and Progress Tracker */}
-      <div className="flex  sm:flex-row justify-between items-center sm:gap-6 text-white mb-6">
+      <div className="flex sm:flex-row justify-between items-center sm:gap-6 text-white mb-6">
         <Link href={"/homepage"}>
           <MdArrowBackIos className="h-8 w-8 text-white" />
         </Link>
@@ -124,15 +137,22 @@ const UploadWizard = () => {
         </div>
       </div>
 
-      {loading && <UploadingUi/>}
+      {loading && <UploadingUi />}
 
       {/* Message */}
       {message === "error" && <ErroMessage setMessage={setMessage} />}
       {message === "success" && <SuccessMessage />}
+      {message && message !== "success" && message !== "error" && (
+        <Validation message={message}/>
+      )}
 
       {/* Step Components */}
       {step === 1 && (
-        <StepOne formData={formData} setFormData={setFormData} goToNextStep={goToNextStep} />
+        <StepOne
+          formData={formData}
+          setFormData={setFormData}
+          goToNextStep={goToNextStep}
+        />
       )}
       {step === 2 && (
         <StepTwo
