@@ -55,7 +55,7 @@ const UploadWizard = () => {
     }
 
     // Add validation for step 2 (example for image files)
-    if (step === 2 && formData.images.length === 0) {
+    if (step === 2 && formData.files.length === 0) {
       setMessage("Please upload at least one image.");
       return;
     }
