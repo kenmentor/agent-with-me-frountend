@@ -259,7 +259,9 @@ const RentalPage: React.FC = () => {
           )}
         </AnimatePresence>
       </div>
-
+      <div className="bg-white ">
+      {<HouseMainComponent keyword={{category:data.category,min:`${data.price-10000}`,max:"",type:data.type,location:data.location,limit:6,id:data._id}} bardge={1} /> }
+      </div>
       <Footer />
     </>
   );
