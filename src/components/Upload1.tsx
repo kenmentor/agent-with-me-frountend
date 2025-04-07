@@ -143,8 +143,8 @@ const UploadWizard = () => {
       {/* Message */}
       {message === "error" && <ErroMessage setMessage={setMessage} />}
       {message === "success" && <SuccessMessage />}
-      {message && message !== "success" && message !== "error" && (
-        <Validation message={message}/>
+      {message && message !== "success" && message !== "error" &&message !=="" && (
+        <Validation message={message} setMessage={setMessage}/>
       )}
 
       {/* Step Components */}
