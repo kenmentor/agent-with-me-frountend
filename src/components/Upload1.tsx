@@ -1,3 +1,4 @@
+"use client"
 import React, { useState } from "react";
 import StepOne from "./uploadScreen/upload1";
 import StepTwo from "./uploadScreen/upload2";
