@@ -47,7 +47,7 @@ const UploadWizard = () => {
     electricity: 90,
   });
   const [message, setMessage] = useState("");
-  const [progress,setProgress]= useState(0)
+ 
 
   const goToNextStep = () => setStep((prev) => prev + 1);
   const goToPreviousStep = () => setStep((prev) => prev - 1);
