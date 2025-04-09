@@ -18,7 +18,7 @@ interface data {
   rating: number;
   category: string;
   thumbnail: string;
-  gallery: string[];
+  gallery: [{url:string,type:string}];
   price: number;
   address: string;
   state: string;
@@ -42,7 +42,7 @@ const RentalPage: React.FC = () => {
     rating: 4.5,
     category: "Mediate",
     thumbnail: "",
-    gallery: [""],
+    gallery: [{url:"",type:""}],
     price: 4933,
     address: "saga ",
     state: "lagos",
@@ -53,7 +53,7 @@ const RentalPage: React.FC = () => {
   });
 
   const handleImageClick = (index: number) => {
-    setSelectedImage(data.gallery[index]);
+    setSelectedImage(data.gallery[index].url);
     setCurrentIndex(index);
   };
 
@@ -62,14 +62,14 @@ const RentalPage: React.FC = () => {
 
     
     const newIndex = (currentIndex + 1) % data.gallery.length;
-    setSelectedImage(data.gallery[newIndex]);
+    setSelectedImage(data.gallery[newIndex].url);
     setCurrentIndex(newIndex);
   }
   };
 
   const prevImage = () => {
     const newIndex = (currentIndex - 1 + data.gallery.length) % data.gallery.length;
-    setSelectedImage(data.gallery[newIndex]);
+    setSelectedImage(data.gallery[newIndex].url);
     setCurrentIndex(newIndex);
   };
 
@@ -111,7 +111,7 @@ const RentalPage: React.FC = () => {
   useEffect(() => {
     getData();
     updateView(data._id);
-  }, []);
+  }, [data]);
 
   let categoryStyle = "text-blue-500";
 
@@ -165,12 +165,12 @@ const RentalPage: React.FC = () => {
               <div
                 key={index}
                 className={`relative w-24 h-24 rounded overflow-hidden cursor-pointer ${
-                  selectedImage === image ? "border-4 border-blue-500" : ""
+                  selectedImage === image .url? "border-4 border-blue-500" : ""
                 }`}
                 onClick={() => handleImageClick(index)}
               >
                 <Image
-                  src={image || brokenImage}
+                  src={image.url || brokenImage}
                   alt={`gallery-image-${index}`}
                   layout="fill"
                   objectFit="cover"
