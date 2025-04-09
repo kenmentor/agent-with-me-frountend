@@ -41,26 +41,16 @@ const HouseMainComponent: React.FC<HouseMainComponent> = ({ keyword, bardge = 1 
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
 
-  // const searchParams = useSearchParams();
+
 
   useEffect(() => {
-    // const queryObj: Record<string, string> = {};
-
-    // // Only add params if they exist (filter is active)
-    // ["location", "category", "type", "min", "max", "limit", "bardge"].forEach((key) => {
-    //   const val = searchParams.get(key);
-    //   if (val && val !== "") queryObj[key] = val;
-    // });
-
-    // const query = new URLSearchParams(queryObj).toString();
-    // // ${query ? "?" + query : ""}
+    
     const finalUrl = `https://agent-with-me-backend.onrender.com/v1/resources?location=${keyword?.location}&limit =${keyword?.limit}&category =${keyword?.category}&id =${keyword?.id}`;
 
     const fetchData = async () => {
       try {
         setLoading(true);
         setError(false);
-
         const res = await fetch(finalUrl);
         const result = await res.json();
         console.log(result)

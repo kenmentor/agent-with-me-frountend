@@ -47,7 +47,9 @@ const StepOne: React.FC<StepOneProps> = ({ formData, setFormData, goToNextStep }
       <h2 className="text-2xl font-semibold text-gray-100 mb-6">Step 1: Upload Files</h2>
       
       <div className="space-y-4">
-      
+      <label className="text-gray-400"  htmlFor="title">
+        title
+        </label>
         <input
         id="title"
           type="text"
@@ -56,6 +58,10 @@ const StepOne: React.FC<StepOneProps> = ({ formData, setFormData, goToNextStep }
           onChange={(e) => setFormData((prev: formData) => ({ ...prev, title: e.target.value }))}
           className="w-full p-3 bg-gray-800 text-white rounded-md focus:outline-none focus:ring focus:ring-blue-500"
         />
+         
+        <label className="text-gray-400" htmlFor="price">
+        price
+       </label>
          <input
          id="price"
           type="number"
@@ -64,10 +70,10 @@ const StepOne: React.FC<StepOneProps> = ({ formData, setFormData, goToNextStep }
           onChange={(e) => setFormData((prev: formData) => ({ ...prev, price: e.target.value }))}
           className="w-full p-3 bg-gray-800 text-white rounded-md focus:outline-none focus:ring focus:ring-blue-500"
         />
-       <p className="text-gray-400">
-
-       </p>
-     
+      
+      <label className="text-gray-400"  htmlFor="location">
+        location
+        </label>
          <input
              id="location"
           type="text"
@@ -76,6 +82,9 @@ const StepOne: React.FC<StepOneProps> = ({ formData, setFormData, goToNextStep }
           onChange={(e) => setFormData((prev: formData) => ({ ...prev, location: e.target.value }))}
           className="w-full p-3 bg-gray-800 text-white rounded-md focus:outline-none focus:ring focus:ring-blue-400"
         />
+         <label className="text-gray-400"  htmlFor="address">
+        address
+        </label>
          <input
              id="address"
           type="text"
@@ -84,7 +93,9 @@ const StepOne: React.FC<StepOneProps> = ({ formData, setFormData, goToNextStep }
           onChange={(e) => setFormData((prev: formData) => ({ ...prev, address: e.target.value }))}
           className="w-full p-3 bg-gray-800 text-white rounded-md focus:outline-none focus:ring focus:ring-blue-400"
         />
-        
+         <label className="text-gray-400"  htmlFor="description">
+        description
+        </label>
         
         <textarea
             id="description"
@@ -95,21 +106,11 @@ const StepOne: React.FC<StepOneProps> = ({ formData, setFormData, goToNextStep }
         />
         
           
-        <label className="text-gray-400" htmlFor="price">
-        price
-       </label>
-       <label className="text-gray-400"  htmlFor="title">
-        title
-        </label>
-        <label className="text-gray-400"  htmlFor="description">
-        description
-        </label>
-        <label className="text-gray-400"  htmlFor="address">
-        address
-        </label>
-        <label className="text-gray-400"  htmlFor="location">
-        location
-        </label>
+       
+      
+       
+       
+        
 
      
       </div>

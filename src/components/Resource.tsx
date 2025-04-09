@@ -34,7 +34,18 @@ const Resource = ({
   electricity ,
   waterSuply
 }: ResourceProps) => {
-  console.log(thumbnail)
+  let categoryStyle = "text-blue-500 bg-blue-100 ";
+
+  if (category === "Premium") {
+    categoryStyle = "text-blue-500  bg-blue-100 " ;
+  }
+  if (category === "Mediate") {
+    categoryStyle = "text-orange-500  bg-orange-100 ";
+  }
+
+  if (category === "Minimal") {
+    categoryStyle = "text-green-500  bg-green-100 ";
+  }
   return (
     <motion.div
       className="relative  bg-gray-50 rounded-sm overflow-hidden border border-gray-300 shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer"
@@ -75,7 +86,7 @@ const Resource = ({
         </p>
         <div className="flex flex-wrap gap-2 sm:gap-3 items-center">
   {/* Category */}
-  <p className="text-[10px] sm:text-xs font-medium text-indigo-500 bg-indigo-100 px-2 py-1 rounded-lg">
+  <p className= {`${categoryStyle} text-[10px] sm:text-xs font-medium  px-2 py-1 rounded-lg`}>
     {category}
   </p>
 

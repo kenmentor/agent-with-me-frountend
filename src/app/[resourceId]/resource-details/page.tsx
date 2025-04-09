@@ -96,9 +96,21 @@ const RentalPage: React.FC = () => {
       console.log("Fetch error:", err);
     }
   }
+  async function updateView(id:string) {
+    try {
+      const res = await fetch(`https://agent-with-me-backend.onrender.com/v1/updateview`,{
+        method:"PUT",
+        body:id
+      });
+      console.log(res.json())
+    } catch (err) {
+      console.log("Fetch error:", err);
+    }
+  }
 
   useEffect(() => {
     getData();
+    updateView(data._id);
   }, []);
 
   let categoryStyle = "text-blue-500";
@@ -196,7 +208,7 @@ const RentalPage: React.FC = () => {
         </div>
 
         {/* Description */}
-        <div className="text-gray-800 bg-gray-300 p-4 rounded">
+        <div className="text-gray-800 bg-gray-100 p-4 rounded mt-2">
   <h1 className="font-semibold text-lg">Description</h1>
   <div className="relative">
     <p
@@ -204,13 +216,13 @@ const RentalPage: React.FC = () => {
       style={{ WebkitLineClamp: !readMore ? 3 : 'none', display: '-webkit-box', WebkitBoxOrient: 'vertical' }}
     >
       {data.description}
-    </p>
-    <span
+      <span
       onClick={() => setReadMore((prev) => !prev)}
-      className="text-blue-500 cursor-pointer absolute bottom-0 right-0 mr-2"
+      className="text-blue-500 cursor-pointer  "
     >
       {!readMore ? "Read more" : "Show less"}
     </span>
+    </p>
   </div>
 </div>
 

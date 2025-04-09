@@ -93,7 +93,6 @@ const UploadWizard = () => {
       data.append("state", formData.state);
       data.append("waterSuply", JSON.stringify(formData.waterSuply));
       data.append("electricity", JSON.stringify(formData.electricity));
-
       formData.files.forEach((file) => {
         data.append("files", file);
       });
@@ -104,9 +103,7 @@ const UploadWizard = () => {
       });
 
       const result = await res.json();
-
       console.log("Server Response:", result);
-
       if (!res.ok) {
         throw new Error(result.message || "Upload failed");
       }
