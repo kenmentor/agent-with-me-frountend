@@ -65,6 +65,7 @@ const HouseMainComponent: React.FC<HouseMainComponent> = ({ keyword, bardge = 1 
         setLoading(false);
       }
     };
+    console.log("gfgg")
 
     fetchData();
   }, [keyword]);
