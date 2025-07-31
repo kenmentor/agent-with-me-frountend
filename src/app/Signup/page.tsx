@@ -1,117 +1,135 @@
-"use client";
+"use client"
+import FlotingShape from "@/components/FlotingShape"
+import { motion } from "framer-motion"
+import Input from "@/components/Input"
+import { BiFemale, BiLoader, BiLock, BiUser } from "react-icons/bi"
+import { useState } from "react"
+import { MdEmail } from "react-icons/md"
+import Link from "next/link"
+import { useAuthStore } from "../store/authStore"
+import PasswordStrengthMeter from "@/components/passwordStrengthMeter"
+import { useRouter } from "next/navigation"
+import { GrContact } from "react-icons/gr"
 
-import React, { ChangeEvent, useState } from "react";
-import { BsGoogle } from "react-icons/bs";
-import { useRouter } from "next/navigation";
 
-const SignupPage: React.FC = () => {
+function Page() {
   const router = useRouter()
-  const [form, setForm] = useState({
+  const { signup, error, isLoading, user } = useAuthStore()
+  const [formData, setFormData] = useState({
+    name: "",
     email: "",
     password: "",
-    confirmPassword: "",
-    username: "",
-  });
+    dateOfBirth: "",
+    phoneNumber: ""
 
-  const [error, setError] = useState("");
-  const [loading,setloading ] = useState(false)
+  })
+  function handleChange(e) {
+    const elementName = e.target.name
 
-  function update(e: ChangeEvent<HTMLInputElement>) {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  }
-
-  async function createUser() {
-    try{
-setError("")
-setloading(true)
-    if (!form.username || !form.email || !form.password || !form.confirmPassword) {
-      setError("All fields are required");
-      return;
-    }
-    if (form.password !== form.confirmPassword) {
-      setError("Passwords do not match");
-      return;
-    }
-
-    const res =  await fetch("https://agent-with-me-backend.onrender.com/v1/signup", {
-      method: "POST",
-      body: JSON.stringify({
-        email: form.email,
-        password: form.password,
-      }),
-      headers: { "Content-Type": "application/json" },
+    setFormData((prev) => {
+      return { ...prev, [elementName]: e.target.value }
     })
-    const {ok,data} = await res.json()
-    if(ok){
-      localStorage.setItem("token",data)
-    router.push("/homepage")
-    }else{
-     throw new Error("something went wrong")
+  }
+
+
+  async function handleSumbit(e) {
+    e.preventDefault()
+    try {
+      const data = await signup(formData)
+      console.log(user)
+      if (!error) {
+        router.push("/verify-email")
+      }
+
+
+    } catch (error) {
+      console.log(error)
     }
-    
-    
   }
-  catch(err){
-     console.error("Error:", err)
-     setError("something went wrong try again ")
-  }
-  finally{
-    setloading(false)
-    
-  }
-      
-  }
-
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 p-6">
-      <div className="bg-white p-8 rounded-xl shadow-xl w-full max-w-md border border-gray-200 text-gray-800">
-        <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">Create an Account</h1>
+    <div className=" min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-blue-900 justify-center relative overflow-hidden flex items-center">
+      <FlotingShape color="bg-blue-400" size="w-64 h-64" top="-5%" left="10%" delay={0} />
+      <FlotingShape color="bg-blue-400" size="w-45 h-45" top="50%" left="70%" delay={5} />
+      <FlotingShape color="bg-blue-400" size="w-30 h-30" top="-30%" left="90%" delay={2} />
 
-        {error && <p className="text-red-500 text-sm mb-4 text-center">{error}</p>}
 
-        <input
-          type="email"
-          placeholder="Email"
-          name="email"
-          value={form.email}
-          onChange={update}
-          className="w-full p-3 border border-gray-300 text-gray-800 rounded-lg mb-4 focus:ring-2 focus:ring-blue-500 shadow-sm"
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          name="password"
-          value={form.password}
-          onChange={update}
-          className="w-full p-3 border  border-gray-300 text-gray-800 rounded-lg mb-4 focus:ring-2 focus:ring-blue-500 shadow-sm"
-        />
-        <input
-          type="password"
-          placeholder="Confirm Password"
-          name="confirmPassword"
-          value={form.confirmPassword}
-          onChange={update}
-          className="w-full p-3 border border-gray-300 text-gray-800 rounded-lg mb-4 focus:ring-2 focus:ring-blue-500 shadow-sm"
-        />
-        
-        <button
-          onClick={createUser}
-          className="w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition shadow-md font-semibold"
-        >
-          {loading?"loading...":"Sign Up"}
-        </button>
+      <motion.div initial={
+        {
+          opacity: 0, y: 20
+        }
+      }
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
 
-        <div className="text-center mt-4">
-          <p className="text-sm text-gray-600">or continue with</p>
-          <button
-            className="flex items-center justify-center w-full border border-gray-300 text-gray-800 p-3 rounded-lg hover:bg-gray-100 transition mt-2 shadow-sm"
-          >
-            <BsGoogle className="mr-2 text-blue-500" /> Google
-          </button>
+        className=" max-w-md w-full bg-gray-800 bg-opacity-50 backdrop-filter backdrop-blur-xl rounded-2xl shadow-xl "
+      >
+        <div className=" p-8">
+          <h2 className="text-3xl font-bold mb-6 text-center bg-gradient-to-r from-blue-400 to to-blue-500 text-transparent bg-clip-text">
+            Create Account
+          </h2>
+          <form onSubmit={handleSumbit}>
+            <Input icon={BiUser}
+              type="text"
+              placeholder="Full Name"
+              value={formData.name}
+              name="name"
+              onChange={handleChange}
+
+            />
+            <Input icon={MdEmail}
+              type="email"
+              placeholder="Email"
+              value={formData.email}
+
+              name="email"
+              onChange={handleChange}
+
+            />
+            <Input icon={GrContact}
+              type="number"
+              placeholder="Phone Number"
+              value={formData.phoneNumber}
+
+              name="phoneNumber"
+              onChange={handleChange}
+
+            />
+            <Input icon={BiLock}
+              type="date"
+              placeholder="Date Of Birth"
+              value={formData.dateOfBirth}
+              name="dateOfBirth"
+              onChange={handleChange}
+
+            />
+            <Input icon={BiLock}
+              type="password"
+              placeholder="Password"
+              value={formData.password}
+              name="password"
+              onChange={handleChange}
+
+            />
+            {error && <p className="text-red-500 font-semibold mt-2">{error}</p>}
+            <PasswordStrengthMeter password={formData.password} />
+            <motion.button className=" mt-5 w-full py-3 px-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-bold rounded-lg shadow-lg hover:from-blue-600 hover:to-blue-700 focus:outline-none focus:ring-zinc-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 transition duration-200 "
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.90 }}
+              type="submit"
+              disabled={isLoading}
+            >
+              {isLoading ? <BiLoader className="animate-spin mx-auto " size={24} /> : "Sign Up"}
+            </motion.button>
+          </form>
         </div>
-      </div>
+        <div className="px-8 py-4 bg-gray-900 bg-opacity-50 flex justify-center">
+          <p className=" text-sm text-gray-400">
+            Already have an account {""}
+            <Link href={"/Login"} className="text-blue-400 hover:underline ">Login </Link>
+          </p>
+        </div>
+      </motion.div>
     </div>
-  );
-};
-
-export default SignupPage;
+  )
+}
+export default Page

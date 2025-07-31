@@ -10,6 +10,7 @@ import { ErroMessage, SuccessMessage, Validation } from "./message";
 import { MdArrowBackIos } from "react-icons/md";
 import Link from "next/link";
 import UploadingUi from "./UploadingUi";
+import FlotingShape from "./FlotingShape";
 
 interface formData {
   images: File[];
@@ -28,7 +29,7 @@ interface formData {
 }
 
 const UploadWizard = () => {
-  const [step, setStep] = useState<number>(1);
+  const [step, setStep] = useState<number>(5);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState<formData>({
     title: "",
@@ -97,9 +98,12 @@ const UploadWizard = () => {
         data.append("files", file);
       });
 
-      const res = await fetch("https://agent-with-me-backend.onrender.com/v1/upload", {
+      const res = await fetch(`http://localhost:800/v1/house`, {
         method: "POST",
         body: data,
+        headers: {
+          'Content-Type': 'application/json'
+        }
       });
 
       const result = await res.json();
@@ -117,32 +121,23 @@ const UploadWizard = () => {
     }
   };
 
-  return (
-    <div className="max-w-full mx-auto h-full p-6">
-      {/* Header with Back Arrow and Progress Tracker */}
-      <div className="flex sm:flex-row justify-between items-center sm:gap-6 text-white mb-6">
-        <Link href={"/homepage"}>
-          <MdArrowBackIos className="h-8 w-8 text-white" />
-        </Link>
 
-        {/* Progress Tracker */}
-        <div className="flex justify-between w-full bg-gray-300 rounded-full overflow-hidden h-4 mt-4 sm:mt-0">
-          <div
-            className="flex bg-blue-700 h-full rounded-full duration-1000"
-            style={{
-              width: `${((step - 1) / 5) * 100}%`,
-            }}
-          ></div>
-        </div>
-      </div>
+  return (
+    <div className="max-w-full mx-auto h-full p-6items-center   min-h-screen bg-gradient-to-br from-gray-900 justify-center relative overflow-hidden flex items-center ">
+      <FlotingShape color="bg-blue-400" size="w-64 h-64" top="-5%" left="10%" delay={0} />
+      <FlotingShape color="bg-blue-400" size="w-45 h-45" top="50%" left="70%" delay={5} />
+      <FlotingShape color="bg-blue-400" size="w-30 h-30" top="-30%" left="90%" delay={2} />
+
+      {/* Header with Back Arrow and Progress Tracker */}
+
 
       {loading && <UploadingUi />}
 
       {/* Message */}
       {message === "error" && <ErroMessage setMessage={setMessage} />}
       {message === "success" && <SuccessMessage />}
-      {message && message !== "success" && message !== "error" &&message !=="" && (
-        <Validation message={message} setMessage={setMessage}/>
+      {message && message !== "success" && message !== "error" && message !== "" && (
+        <Validation message={message} setMessage={setMessage} />
       )}
 
       {/* Step Components */}
@@ -151,6 +146,7 @@ const UploadWizard = () => {
           formData={formData}
           setFormData={setFormData}
           goToNextStep={goToNextStep}
+          step={step}
         />
       )}
       {step === 2 && (
@@ -159,6 +155,7 @@ const UploadWizard = () => {
           setFormData={setFormData}
           goToNextStep={goToNextStep}
           goToPreviousStep={goToPreviousStep}
+          step={step}
         />
       )}
       {step === 3 && (
@@ -167,6 +164,7 @@ const UploadWizard = () => {
           setFormData={setFormData}
           goToNextStep={goToNextStep}
           goToPreviousStep={goToPreviousStep}
+          step={step}
         />
       )}
       {step === 4 && (
@@ -175,6 +173,7 @@ const UploadWizard = () => {
           goToPreviousStep={goToPreviousStep}
           goToNextStep={goToNextStep}
           setFormData={setFormData}
+          step={step}
         />
       )}
       {step === 5 && (
@@ -183,6 +182,7 @@ const UploadWizard = () => {
           setFormData={setFormData}
           goToNextStep={goToNextStep}
           goToPreviousStep={goToPreviousStep}
+          step={step}
         />
       )}
       {step === 6 && (

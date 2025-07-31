@@ -9,6 +9,7 @@ import Footer from "@/components/footer";
 import HouseMainComponent from "@/components/HouseMainComponent";
 import HeaderCustom from "@/components/HeaderCostum";
 import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
+import { FaBullseye } from "react-icons/fa6";
 
 interface data {
   _id: string;
@@ -18,7 +19,7 @@ interface data {
   rating: number;
   category: string;
   thumbnail: string;
-  gallery: [{url:string,type:string}];
+  gallery: [{ url: string, type: string }];
   price: number;
   address: string;
   state: string;
@@ -42,7 +43,7 @@ const RentalPage: React.FC = () => {
     rating: 4.5,
     category: "Mediate",
     thumbnail: "",
-    gallery: [{url:"",type:""}],
+    gallery: [{ url: "", type: "" }],
     price: 4933,
     address: "saga ",
     state: "lagos",
@@ -58,13 +59,13 @@ const RentalPage: React.FC = () => {
   };
 
   const nextImage = () => {
-    if(currentIndex <= data.gallery.length){
+    if (currentIndex <= data.gallery.length) {
 
-    
-    const newIndex = (currentIndex + 1) % data.gallery.length;
-    setSelectedImage(data.gallery[newIndex].url);
-    setCurrentIndex(newIndex);
-  }
+
+      const newIndex = (currentIndex + 1) % data.gallery.length;
+      setSelectedImage(data.gallery[newIndex].url);
+      setCurrentIndex(newIndex);
+    }
   };
 
   const prevImage = () => {
@@ -82,7 +83,7 @@ const RentalPage: React.FC = () => {
 
   async function getData() {
     try {
-      const res = await fetch(`https://agent-with-me-backend.onrender.com/v1/details/${resourceId}`);
+      const res = await fetch(`http://localhost:800/v1/house/`);
       const result = await res.json();
 
       if (result && result.data) {
@@ -96,11 +97,11 @@ const RentalPage: React.FC = () => {
       console.log("Fetch error:", err);
     }
   }
-  async function updateView(id:string) {
+  async function updateView(id: string) {
     try {
-      const res = await fetch(`https://agent-with-me-backend.onrender.com/v1/updateview`,{
-        method:"PUT",
-        body:id
+      const res = await fetch(`http://localhost:800/v1/house/v1/`, {
+        method: "PUT",
+        body: id
       });
       console.log(res.json())
     } catch (err) {
@@ -111,7 +112,7 @@ const RentalPage: React.FC = () => {
   useEffect(() => {
     getData();
     updateView(data._id);
-  }, [data]);
+  }, []);
 
   let categoryStyle = "text-blue-500";
 
@@ -126,8 +127,8 @@ const RentalPage: React.FC = () => {
     categoryStyle = "text-green-500";
   }
 
-  const brokenImage = "brokenImage"; // Default placeholder for broken images
-
+  const brokenImage = ""; // Default placeholder for broken images
+  let count = 0
   return (
     <>
       <HeaderCustom text={data.title || "Title"} showBackButton={true} />
@@ -180,8 +181,10 @@ const RentalPage: React.FC = () => {
               </div>
             ))}
           </div>
+          
         )}
 
+        
         {/* Pricing & Booking */}
         <div className="mt-6 p-4 bg-gray-100 rounded">
           <p className="text-lg font-semibold text-gray-800">
@@ -194,7 +197,10 @@ const RentalPage: React.FC = () => {
             </div>
           </p>
           <button className="mt-4 w-full bg-orange-500 text-white py-2 rounded font-semibold hover:bg-orange-600 transition">
-            Rent Now
+            Rent Now <h1>
+
+          {count}
+        </h1>
           </button>
 
           {/* WhatsApp Contact Button */}
@@ -209,22 +215,22 @@ const RentalPage: React.FC = () => {
 
         {/* Description */}
         <div className="text-gray-800 bg-gray-100 p-4 rounded mt-2">
-  <h1 className="font-semibold text-lg">Description</h1>
-  <div className="relative">
-    <p
-      className={`transition-all duration-300 ease-in-out ${!readMore ? "max-h-20 overflow-hidden" : "max-h-full"}`}
-      style={{ WebkitLineClamp: !readMore ? 3 : 'none', display: '-webkit-box', WebkitBoxOrient: 'vertical' }}
-    >
-      {data.description}
-      <span
-      onClick={() => setReadMore((prev) => !prev)}
-      className="text-blue-500 cursor-pointer  "
-    >
-      {!readMore ? "Read more" : "Show less"}
-    </span>
-    </p>
-  </div>
-</div>
+          <h1 className="font-semibold text-lg">Description</h1>
+          <div className="relative">
+            <p
+              className={`transition-all duration-300 ease-in-out ${!readMore ? "max-h-20 overflow-hidden" : "max-h-full"}`}
+              style={{ WebkitLineClamp: !readMore ? 3 : 'none', display: '-webkit-box', WebkitBoxOrient: 'vertical' }}
+            >
+              {data.description}
+              <span
+                onClick={() => setReadMore((prev) => !prev)}
+                className="text-blue-500 cursor-pointer  "
+              >
+                {!readMore ? "Read more" : "Show less"}
+              </span>
+            </p>
+          </div>
+        </div>
 
 
         {/* Modal for Full-Screen Image View */}
@@ -276,8 +282,11 @@ const RentalPage: React.FC = () => {
         </AnimatePresence>
       </div>
       <div className="bg-white ">
-      {<HouseMainComponent keyword={{category:data.category,min:`${data.price-10000}`,max:"",type:data.type,location:data.location,limit:6,id:data._id}} bardge={1} /> }
+
+        {<HouseMainComponent keyword={{ category: data.category, min: `${data.price - 10000}`, max: "", type: data.type, location: data.location, limit: 6, id: data._id }} bardge={1} page={false} />}
+  
       </div>
+
       <Footer />
     </>
   );

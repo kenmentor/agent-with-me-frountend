@@ -1,0 +1,299 @@
+'use client'
+
+import React, { useEffect, useState } from 'react'
+import { GoVerified } from 'react-icons/go'
+import Footer from '@/components/footer'
+import HouseMainComponent from '@/components/HouseMainComponent'
+
+const userId = ""
+
+const ProfilePage = () => {
+  const [userData, setUserData] = useState({
+    username: "John Doe",
+    dateOfBirth: "1997-05-05",
+    phoneNumber: "0903894847",
+    socialMedia: ["https://twitter.com/johndoe"],
+    rank: 1,
+    role: "user",
+    adminVerified: true,
+    profile: "/profile.jpg",
+    email: "john@example.com"
+  })
+
+  // Future: Load user data
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const res = await fetch(`http://localhost:800/v1/user/${userId}`)
+  //       const result = await res.json()
+  //       setUserData(result)
+  //     } catch (error) {
+  //       console.error("Error fetching user:", error)
+  //     }
+  //   }
+  //   fetchData()
+  // }, [])
+
+  return (
+    <main className="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 grid grid-cols-1 lg:grid-cols-4 gap-8">
+
+        {/* USER PROFILE SIDEBAR */}
+        <div>
+         
+
+        </div>
+        <div>
+          {/* MAIN CONTENT (HOUSES) */}
+          <section className="lg:col-span-3">
+            <div className="mb-6">
+              <h1 className="text-2xl font-bold">Your Uploaded Houses</h1>
+              <p className="text-sm text-gray-500 dark:text-gray-400">Below is a list of all properties you’ve uploaded.</p>
+            </div>
+
+            {/* This component should render a beautiful grid */}
+            <div className="bg-white dark:bg-gray-800 p-4 rounded-2xl shadow">
+              <HouseMainComponent userId={userId} page={false} />
+            </div>
+          </section>
+        </div>
+
+      </div>
+      {/* 
+      <Footer /> */}
+    </main>
+  )
+}
+
+export default ProfilePage
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+///////////////////////////////////////////login ////////////////////////////////////
+
+"use client";
+
+import React, { ChangeEvent, useState } from "react";
+import { motion } from "framer-motion";
+import { BsGoogle } from "react-icons/bs";
+
+
+const Login: React.FC = () => {
+  const [form, setForm] = useState({ email: "", password: "" });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  function update(e: ChangeEvent<HTMLInputElement>) {
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  }
+
+  async function loginUser() {
+    setLoading(true);
+    setError("");
+
+    try {
+      const res = await fetch("http://localhost:800/v1/auth/login", {
+        method: "POST",
+        body: JSON.stringify(form),
+        headers: { "Content-Type": "application/json" },
+      })
+      const {ok,data} = await res.json()
+
+      if (!ok) throw new Error("Invalid email or password");
+      console.log("Login successful");
+      localStorage.setItem("token",data)
+    } catch {
+      setError("incorrect username or password");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br flex items-center justify-center bg-gray-100 text-gray-900">
+     
+      <motion.div
+        className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-sm border border-gray-300"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: "easeInOut" }}
+      >
+        <h1 className="text-2xl font-semibold text-center">Login</h1>
+
+        {error && <p className="text-red-500 text-sm mt-2 text-center">{error}</p>}
+
+        <div className="mt-6">
+          <input
+            type="email"
+            placeholder="Email"
+            name="email"
+            onChange={update}
+            value={form.email}
+            className="w-full p-3 bg-gray-200 text-gray-900 rounded-lg outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
+        <div className="mt-4">
+          <input
+            type="password"
+            placeholder="Password"
+            name="password"
+            onChange={update}
+            value={form.password}
+            className="w-full p-3 bg-gray-200 text-gray-900 rounded-lg outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
+        <button
+          onClick={loginUser}
+          className="mt-6 w-full bg-blue-600 hover:bg-blue-700 transition-all p-3 rounded-lg text-white font-semibold flex items-center justify-center gap-2"
+          disabled={loading}
+        >
+          {loading ? "Logging in..." : "Continue"}
+        </button>
+
+        <div className="mt-4 flex items-center justify-center">
+          <button className="flex items-center gap-2 bg-gray-200 p-3 rounded-lg w-full hover:bg-gray-300 transition">
+            <BsGoogle size={18} />
+            Use Google Account
+          </button>
+        </div>
+      </motion.div>
+    </div>
+    
+  );
+};
+
+export default Login;
+/////////////////////////////////////////////sugnup //////////////////////////////////////
+"use client";
+
+import React, { ChangeEvent, useState } from "react";
+import { BsGoogle } from "react-icons/bs";
+import { useRouter } from "next/navigation";
+
+const SignupPage: React.FC = () => {
+  const router = useRouter()
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+    confirmPassword: "",
+    username: "",
+  });
+
+  const [error, setError] = useState("");
+  const [loading,setloading ] = useState(false)
+
+  function update(e: ChangeEvent<HTMLInputElement>) {
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  }
+
+  async function createUser() {
+    try{
+setError("")
+setloading(true)
+    if (!form.username || !form.email || !form.password || !form.confirmPassword) {
+      setError("All fields are required");
+      return;
+    }
+    if (form.password !== form.confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+
+    const res =  await fetch("https://agent-with-me-backend.onrender.com/v1/signup", {
+      method: "POST",
+      body: JSON.stringify({
+        email: form.email,
+        password: form.password,
+      }),
+      headers: { "Content-Type": "application/json" },
+    })
+    const {ok,data} = await res.json()
+    if(ok){
+      localStorage.setItem("token",data)
+    router.push("/homepage")
+    }else{
+     throw new Error("something went wrong")
+    }
+    
+    
+  }
+  catch(err){
+     console.error("Error:", err)
+     setError("something went wrong try again ")
+  }
+  finally{
+    setloading(false)
+    
+  }
+      
+  }
+
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 p-6">
+      <div className="bg-white p-8 rounded-xl shadow-xl w-full max-w-md border border-gray-200 text-gray-800">
+        <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">Create an Account</h1>
+
+        {error && <p className="text-red-500 text-sm mb-4 text-center">{error}</p>}
+
+        <input
+          type="email"
+          placeholder="Email"
+          name="email"
+          value={form.email}
+          onChange={update}
+          className="w-full p-3 border border-gray-300 text-gray-800 rounded-lg mb-4 focus:ring-2 focus:ring-blue-500 shadow-sm"
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          name="password"
+          value={form.password}
+          onChange={update}
+          className="w-full p-3 border  border-gray-300 text-gray-800 rounded-lg mb-4 focus:ring-2 focus:ring-blue-500 shadow-sm"
+        />
+        <input
+          type="password"
+          placeholder="Confirm Password"
+          name="confirmPassword"
+          value={form.confirmPassword}
+          onChange={update}
+          className="w-full p-3 border border-gray-300 text-gray-800 rounded-lg mb-4 focus:ring-2 focus:ring-blue-500 shadow-sm"
+        />
+        
+        <button
+          onClick={createUser}
+          className="w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition shadow-md font-semibold"
+        >
+          {loading?"loading...":"Sign Up"}
+        </button>
+
+        <div className="text-center mt-4">
+          <p className="text-sm text-gray-600">or continue with</p>
+          <button
+            className="flex items-center justify-center w-full border border-gray-300 text-gray-800 p-3 rounded-lg hover:bg-gray-100 transition mt-2 shadow-sm"
+          >
+            <BsGoogle className="mr-2 text-blue-500" /> Google
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default SignupPage;

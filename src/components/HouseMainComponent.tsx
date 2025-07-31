@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import Loading from "@/components/Loainding";
 import Error from "@/components/Erro";
 import { motion } from "framer-motion";
+import { useAuthStore } from "@/app/store/authStore";
 // import { useSearchParams } from "next/navigation";
 
 interface ResourceType {
@@ -29,23 +30,26 @@ interface keyword {
   location: string;
   limit: number;
   id?: string;
+
 }
 
 interface HouseMainComponent {
   keyword?: keyword;
   bardge?: number;
+  page: boolean;
+  userId?: string
 }
 
-const HouseMainComponent: React.FC<HouseMainComponent> = ({ keyword, bardge = 1 }) => {
+const HouseMainComponent: React.FC<HouseMainComponent> = ({ keyword, bardge = 1, page = true, userId }) => {
   const [data, setData] = useState<ResourceType[]>([]);
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
 
-
-
+  const { user } = useAuthStore()
+  console.log(user)
   useEffect(() => {
-    
-    const finalUrl = `https://agent-with-me-backend.onrender.com/v1/resources?location=${keyword?.location}&limit=${keyword?.limit}&category =${keyword?.category}&min=${keyword?.min}&max=${keyword?.max}&type=${keyword?.type}&id =${keyword?.id}`;
+
+    const finalUrl = `http://localhost:800/v1/house?userId=${userId}location=${keyword?.location}&limit=${keyword?.limit}&category =${keyword?.category}&min=${keyword?.min}&max=${keyword?.max}&type=${keyword?.type}&id =${keyword?.id}`;
 
     const fetchData = async () => {
       try {
@@ -68,8 +72,8 @@ const HouseMainComponent: React.FC<HouseMainComponent> = ({ keyword, bardge = 1 
     console.log("gfgg")
 
     fetchData();
-  }, [keyword]);
-  
+  }, [page ? keyword : '']);
+
   return (
     <main className="px-6 py-10">
       {loading ? (
