@@ -28,6 +28,6 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/app/Downloads"
-  ],
+, "src/middleware.ts"  ],
   "exclude": ["node_modules"]
 }

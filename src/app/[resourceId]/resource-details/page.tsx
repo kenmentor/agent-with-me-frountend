@@ -128,7 +128,7 @@ const RentalPage: React.FC = () => {
   }
 
   const brokenImage = ""; // Default placeholder for broken images
-  let count = 0
+
   return (
     <>
       <HeaderCustom text={data.title || "Title"} showBackButton={true} />
@@ -165,9 +165,8 @@ const RentalPage: React.FC = () => {
             {data.gallery.map((image, index) => (
               <div
                 key={index}
-                className={`relative w-24 h-24 rounded overflow-hidden cursor-pointer ${
-                  selectedImage === image .url? "border-4 border-blue-500" : ""
-                }`}
+                className={`relative w-24 h-24 rounded overflow-hidden cursor-pointer ${selectedImage === image.url ? "border-4 border-blue-500" : ""
+                  }`}
                 onClick={() => handleImageClick(index)}
               >
                 <Image
@@ -181,10 +180,10 @@ const RentalPage: React.FC = () => {
               </div>
             ))}
           </div>
-          
+
         )}
 
-        
+
         {/* Pricing & Booking */}
         <div className="mt-6 p-4 bg-gray-100 rounded">
           <p className="text-lg font-semibold text-gray-800">
@@ -199,8 +198,7 @@ const RentalPage: React.FC = () => {
           <button className="mt-4 w-full bg-orange-500 text-white py-2 rounded font-semibold hover:bg-orange-600 transition">
             Rent Now <h1>
 
-          {count}
-        </h1>
+            </h1>
           </button>
 
           {/* WhatsApp Contact Button */}
@@ -284,7 +282,7 @@ const RentalPage: React.FC = () => {
       <div className="bg-white ">
 
         {<HouseMainComponent keyword={{ category: data.category, min: `${data.price - 10000}`, max: "", type: data.type, location: data.location, limit: 6, id: data._id }} bardge={1} page={false} />}
-  
+
       </div>
 
       <Footer />

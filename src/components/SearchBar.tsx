@@ -1,16 +1,20 @@
 import React from "react";
-
 import { MdLocationSearching } from "react-icons/md";
+import { useAuthStore } from "@/app/store/authStore";
+import UserAvatar from "./avater";
+
+
+
 
 // Define types for props
-interface keyword { 
-   category: string;
-   min:string;
-   max:string;
-   type:string ;
-   location:string
-   limit:number;
-  }
+interface keyword {
+  category: string;
+  min: string;
+  max: string;
+  type: string;
+  location: string
+  limit: number;
+}
 
 type SearchBarProps = {
   setKeyword: React.Dispatch<
@@ -19,6 +23,7 @@ type SearchBarProps = {
 };
 
 const SearchBar = ({ setKeyword }: SearchBarProps) => {
+  const { logout } = useAuthStore.getState()
   // Handle input change
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setKeyword((prev) => ({
@@ -26,7 +31,15 @@ const SearchBar = ({ setKeyword }: SearchBarProps) => {
       location: e.target.value,
     }));
   };
+  async function handleLogout() {
+    try {
+      const response = await logout()
+      console.log(response)
+    } catch (error) {
+      console.log("error")
+    }
 
+  }
   return (
     <header className="fixed left-0 right-0 bg-white top-0 px-6 py-3 flex items-center gap-4 shadow-md z-50">
       {/* Search Input Wrapper */}
@@ -38,9 +51,10 @@ const SearchBar = ({ setKeyword }: SearchBarProps) => {
           onChange={handleChange}
         />
         {/* Search Icon Inside Input */}
-        
+
         <MdLocationSearching className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500" />
       </div>
+      <UserAvatar />
     </header>
   );
 };

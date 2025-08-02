@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { MdArrowBackIos } from "react-icons/md";
 import { CgShare } from "react-icons/cg";
+import UserAvatar from "./avater";
 
 type HeaderProps = {
   text: string;
@@ -47,6 +48,7 @@ const HeaderCustom = ({ text, showBackButton = true }: HeaderProps) => {
       <div className="w-8">
       <CgShare/>
       </div>
+      <UserAvatar/>
     </motion.header>
   );
 };
